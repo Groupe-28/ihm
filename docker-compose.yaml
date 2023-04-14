@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: db
+    env_file: .env.local
+    ports:
+      - "${POSTGRES_PORT}:6000"
+    volumes:
+      - ./volumes/db:/var/lib/postgresql/data

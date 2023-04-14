@@ -2,13 +2,42 @@ version: "3.4"
 
 services:
     db:
-        image: postgres:15.2-alpine
-        restart: unless-stopped
-        env_file:
-            - ./.env
-        environment:
-            - PGDATA=/var/lib/postgresql/data/pgdata
-        volumes:
-            - ./volumes/db:/var/lib/postgresql/data/pgdata
-        ports:
-            - "5432:5432"
+      image: postgres:15.2-alpine
+      restart: unless-stopped
+      env_file:
+          - ./.env
+      environment:
+          - PGDATA=/var/lib/postgresql/data/pgdata
+      volumes:
+          - ./volumes/db:/var/lib/postgresql/data/pgdata
+      ports:
+          - "5432:5432"
+
+    backend:
+      build: ./backend
+      restart: unless-stopped
+      env_file:
+        - ./backend/docker.env
+      ports:
+        - "8000:8000"
+      volumes:
+        - ./backend:/usr/src/app
+        - /usr/src/app/node_modules
+      depends_on:
+        - db
+
+    frontend:
+      build: ./frontend
+      restart: unless-stopped
+      env_file:
+        - ./frontend/docker.env
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./frontend:/usr/src/app
+        - /usr/src/app/node_modules
+      depends_on:
+        - backend
+
+
+    

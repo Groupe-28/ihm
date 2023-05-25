@@ -1,3 +1,1 @@
-export type TSideBarProps = {
-
-}
+export type TSideBarProps = {};

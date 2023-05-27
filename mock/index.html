@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.io App</title>
+  </head>
+  <body>
+    <h1>Socket.io App</h1>
+    <input type="text" id="messageInput" placeholder="Enter a message" />
+    <button id="sendButton">Send</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      // Handle form submission
+      const form = document.querySelector('form');
+      const messageInput = document.querySelector('#messageInput');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = messageInput.value.trim();
+        if (message) {
+          socket.emit('message', message);
+          messageInput.value = '';
+        }
+      });
+
+      // Handle 'message' event from the server
+      socket.on('message', (message) => {
+        const li = document.createElement('li');
+        li.textContent = message;
+        document.querySelector('#messages').appendChild(li);
+      });
+    </script>
+  </body>
+</html>

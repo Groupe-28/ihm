@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the application dependencies
-RUN npm ci
+RUN yarn install --frozen-lockfile
 
 # Copy the application source code
 COPY . .
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Start the development server
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

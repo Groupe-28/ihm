@@ -2,6 +2,7 @@ import { Icon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Box, Button, Divider, Flex, useColorMode } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { BiStats } from 'react-icons/bi';
+import { CgDebug } from 'react-icons/cg';
 import { GiFarmer } from 'react-icons/gi';
 import { HiHome, HiMap } from 'react-icons/hi';
 import { IoIosSettings } from 'react-icons/io';
@@ -27,6 +28,7 @@ export const SideBar = ({}: TSideBarProps) => {
       <LinkItem name={'Home'} icon={HiHome} to={'/'} />
       <LinkItem name={'Workers'} icon={MdWorkspaces} to={'/workers'} />
       <LinkItem name={'Stats'} icon={BiStats} to={'/stats'} />
+      <LinkItem name={'Logs'} icon={CgDebug} to={'/logs'} />
       <LinkItem name={'Map'} icon={HiMap} to={'/map'} />
       <Box mt={'auto'} />
       <LinkItem name={'Settings'} icon={IoIosSettings} to={'/settings'} />

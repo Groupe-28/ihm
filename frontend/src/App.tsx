@@ -1,12 +1,62 @@
+import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import { SideBar } from './components/features';
+import { SideBar } from './components';
+import { Settings } from './routes/Settings';
+import theme from './theme';
+
+import '@fontsource/bluu-next/700.css';
+import '@fontsource/uncut-sans/300.css';
+import '@fontsource/uncut-sans/400.css';
+import '@fontsource/uncut-sans/500.css';
+import '@fontsource/uncut-sans/600.css';
+import '@fontsource/uncut-sans/700.css';
+import { Maps } from './routes/Maps';
 
 function App() {
   return (
-    <div className="App">
-      <SideBar />
-    </div>
+    <ChakraProvider theme={theme}>
+      <Box className="App w-screen h-screen">
+        <Router>
+          <Flex direction="row" className="w-full h-full">
+            <SideBar />
+            <Box width={'full'} height={'100%'}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/map" element={<Maps />} />
+                <Route path="/stats" element={<Statistics />} />
+                <Route path="/workers" element={<Workers />} />
+                <Route path="/settings" element={<Settings />}>
+                  <Route path="user" element={<Users />} />
+                  <Route path="devices" element={<About />} />
+                </Route>
+              </Routes>
+            </Box>
+          </Flex>
+        </Router>
+      </Box>
+    </ChakraProvider>
   );
+}
+
+function Home() {
+  return <h2>Home</h2>;
+}
+
+function About() {
+  return <h2>About</h2>;
+}
+
+function Workers() {
+  return <h2>Workers</h2>;
+}
+
+function Users() {
+  return <h2>Users</h2>;
+}
+
+function Statistics() {
+  return <h2>Statistics</h2>;
 }
 
 export default App;

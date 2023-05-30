@@ -12,20 +12,30 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
 import { useQuery } from 'react-query';
-import { Log } from '../../../backend/src/exportedTypes';
 import { Table as TableComponent } from '../components';
 import { isJSONObject } from '../lib/tsUtils';
+import { Log } from '../lib/types';
+import { socket } from '../socket';
 
 export const Logs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isConnected, setIsConnected] = useState(false);
   const [logSelected, setLogSelected] = useState<Log | null>(null);
   const { data: logs } = useQuery<Log[]>('logs', () =>
     fetch('http://localhost:8000/logs').then((res) => res.json()),
   );
-  const isConnected = true;
+
+  useEffect(() => {
+    socket.on('connect', () => {
+      setIsConnected(true);
+    });
+    socket.on('disconnect', () => {
+      setIsConnected(false);
+    });
+  }, []);
 
   return (
     <Flex direction={'column'} className="w-full h-full">

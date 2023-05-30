@@ -20,8 +20,6 @@ services:
         - ./backend/docker.env
       ports:
         - "8000:8000"
-      volumes:
-        - ./backend:/usr/src/app
       depends_on:
         - db
 
@@ -37,15 +35,15 @@ services:
       depends_on:
         - backend
 
-    mock-server:
-      build: ./mock
-      restart: unless-stopped
-      ports:
-        - "3001:3001"
-      volumes:
-        - ./mock:/usr/src/app
-      depends_on:
-        - backend
+    # mock-server:
+    #   build: ./mock
+    #   restart: unless-stopped
+    #   ports:
+    #     - "3001:3001"
+    #   volumes:
+    #     - ./mock:/usr/src/app
+    #   depends_on:
+    #     - backend
 
 
     

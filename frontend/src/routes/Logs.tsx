@@ -1,49 +1,31 @@
-import { Badge, Box, Flex, Heading } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import {
+  Badge,
+  Box,
+  Flex,
+  Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import ReactJson from 'react-json-view';
+import { useQuery } from 'react-query';
+import { Log } from '../../../backend/src/exportedTypes';
 import { Table as TableComponent } from '../components';
-import { socket } from '../socket';
-
-type CoordinatesEvent = {
-  lat: number;
-  lng: number;
-};
-
-type SocketEvent = {
-  name: string;
-  date?: Date;
-  value: CoordinatesEvent;
-};
+import { isJSONObject } from '../lib/tsUtils';
 
 export const Logs = () => {
-  const [isConnected, setIsConnected] = useState(socket.connected);
-  const [events, setEvents] = useState<SocketEvent[]>([]);
-
-  useEffect(() => {
-    function onConnect() {
-      setIsConnected(true);
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-    }
-
-    function onCoordinatesEvent(value: CoordinatesEvent) {
-      setEvents((events) => [
-        ...events,
-        { name: 'coordinates', date: new Date(), value },
-      ]);
-    }
-
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-    socket.on('coordinates', onCoordinatesEvent);
-
-    return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
-      socket.off('coordinates', onCoordinatesEvent);
-    };
-  }, []);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [logSelected, setLogSelected] = useState<Log | null>(null);
+  const { data: logs } = useQuery<Log[]>('logs', () =>
+    fetch('http://localhost:8000/logs').then((res) => res.json()),
+  );
+  const isConnected = true;
 
   return (
     <Flex direction={'column'} className="w-full h-full">
@@ -60,8 +42,47 @@ export const Logs = () => {
         </Badge>
       </Flex>
       <Box className="w-full h-full p-3">
-        <TableComponent rows={events} />
+        <TableComponent
+          rows={logs ?? []}
+          onRowClick={(log) => {
+            setLogSelected(log);
+            onOpen();
+          }}
+        />
       </Box>
+      <Modal size={'5xl'} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Heading>Log</Heading>
+          </ModalHeader>
+          <ModalCloseButton />
+          {logSelected && (
+            <ModalBody>
+              <Flex direction="row" justify="left" gap={2}>
+                <Text fontWeight={'bold'}>Created at</Text>
+                <Text>{new Date(logSelected?.createdAt).toLocaleString()}</Text>
+              </Flex>
+              <Flex direction="row" justify="left" gap={2}>
+                <Text fontWeight={'bold'}>Title</Text>
+                <Text>{logSelected?.title}</Text>
+              </Flex>
+              <Flex
+                direction={isJSONObject(logSelected.content) ? 'column' : 'row'}
+                justify="left"
+                gap={2}
+              >
+                <Text fontWeight={'bold'}>Content</Text>
+                {isJSONObject(logSelected.content) ? (
+                  <ReactJson src={JSON.parse(logSelected.content)} />
+                ) : (
+                  <Text>{logSelected?.content}</Text>
+                )}
+              </Flex>
+            </ModalBody>
+          )}
+        </ModalContent>
+      </Modal>
     </Flex>
   );
 };

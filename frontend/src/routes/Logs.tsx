@@ -10,23 +10,23 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useColorMode,
   useDisclosure,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
-import { useQuery } from 'react-query';
 import { Table as TableComponent } from '../components';
+import { useLogs } from '../lib/api';
 import { isJSONObject } from '../lib/tsUtils';
 import { Log } from '../lib/types';
 import { socket } from '../socket';
 
 export const Logs = () => {
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isConnected, setIsConnected] = useState(false);
   const [logSelected, setLogSelected] = useState<Log | null>(null);
-  const { data: logs } = useQuery<Log[]>('logs', () =>
-    fetch('http://localhost:8000/logs').then((res) => res.json()),
-  );
+  const { data: logs } = useLogs();
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -84,7 +84,10 @@ export const Logs = () => {
               >
                 <Text fontWeight={'bold'}>Content</Text>
                 {isJSONObject(logSelected.content) ? (
-                  <ReactJson src={JSON.parse(logSelected.content)} />
+                  <ReactJson
+                    theme={colorMode === 'dark' ? 'tube' : 'bright:inverted'}
+                    src={JSON.parse(logSelected.content)}
+                  />
                 ) : (
                   <Text>{logSelected?.content}</Text>
                 )}

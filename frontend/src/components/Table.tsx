@@ -1,4 +1,4 @@
-import { Flex, Icon, Input, Text } from '@chakra-ui/react';
+import { Flex, Icon, Input, Text, useColorMode } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import { HiOutlineChevronDown, HiOutlineChevronUp } from 'react-icons/hi';
 
@@ -57,6 +57,8 @@ export const Table = <T,>({
 
     return filteredRows;
   }, [rows, search, sort]);
+
+  const { colorMode } = useColorMode();
 
   return (
     <Flex
@@ -144,11 +146,13 @@ export const Table = <T,>({
                 ))}
               </tr>
             </thead>
-            <tbody className="text-gray-600 dark:text-white-200">
+            <tbody>
               {filteredAndSortedRows.map((row, index) => (
                 <tr
                   key={index}
-                  className="cursor-pointer border-y border-white-300/30 dark:border-dark-300 hover:bg-white-300/30 dark:hover:bg-dark-300/50 transition-colors duration-200"
+                  className={`${
+                    index % 2 ? 'bg-default-100/10' : 'bg-transparent'
+                  } cursor-pointer border-y border-white-300/30 dark:border-dark-300 hover:bg-white-300/30 dark:hover:bg-dark-300/50 transition-colors duration-200`}
                   onClick={() => {
                     if (onRowClick) {
                       onRowClick(row);
@@ -157,12 +161,14 @@ export const Table = <T,>({
                 >
                   {headers.map((header, cellIndex) => (
                     <td key={cellIndex} className="px-6 py-4 whitespace-nowrap">
-                      {row[header] !== null &&
-                      typeof row[header] === 'object' ? (
-                        <pre>{JSON.stringify(row[header])}</pre>
-                      ) : (
-                        row[header].toString()
-                      )}
+                      <Text>
+                        {row[header] !== null &&
+                        typeof row[header] === 'object' ? (
+                          <pre>{JSON.stringify(row[header])}</pre>
+                        ) : (
+                          row[header].toString()
+                        )}
+                      </Text>
                     </td>
                   ))}
                 </tr>
@@ -172,7 +178,9 @@ export const Table = <T,>({
         </div>
       </div>
       <Flex
-        className="w-full bottom-0 left-0 right-0 bg-gray-200 dark:bg-dark-200/80 rounded-b-lg border border-white-300 dark:border-dark-300"
+        className={`w-full bottom-0 left-0 right-0 ${
+          colorMode == 'light' ? 'bg-default-100' : 'bg-default-700'
+        } rounded-b-lg border border-white-300 dark:border-dark-300`}
         align="center"
         justify="center"
       >

@@ -16,7 +16,10 @@ def index():
 def send_message():
     message = {
         "title": "Hello from Python!",
-        "content": "This message was sent from Python!",
+        "content": {
+            "message": "This message was sent from Python!",
+            "author": "Python",
+        },
     }
     producer.send("logs", value=json.dumps(message).encode("utf-8"))
     return "Message sent to Kafka!"

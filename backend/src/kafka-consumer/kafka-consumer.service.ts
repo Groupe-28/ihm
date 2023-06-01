@@ -49,7 +49,14 @@ export class KafkaConsumerService implements OnModuleInit {
 
   async handleLogsTopic(data: Prisma.LogCreateManyInput) {
     try {
-      await this.logsService.createLog(data);
+      const content =
+        typeof data.content === 'string'
+          ? data.content
+          : JSON.stringify(data.content);
+      await this.logsService.createLog({
+        ...data,
+        content,
+      });
     } catch (error) {
       console.error(error);
     }

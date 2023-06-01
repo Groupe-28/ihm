@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, render_template
 from kafka import KafkaProducer
 
@@ -12,8 +14,11 @@ def index():
 
 @app.route("/send-message", methods=["POST"])
 def send_message():
-    message = "Hello, Kafka!"  # Modify the message content as needed
-    producer.send("my-topic", value=message.encode())
+    message = {
+        "title": "Hello from Python!",
+        "content": "This message was sent from Python!",
+    }
+    producer.send("logs", value=json.dumps(message).encode("utf-8"))
     return "Message sent to Kafka!"
 
 

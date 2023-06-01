@@ -13,29 +13,19 @@ import {
   useColorMode,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactJson from 'react-json-view';
 import { Table as TableComponent } from '../components';
-import { useLogs } from '../lib/api';
+import { useKafkaConnectionStatus, useLogs } from '../lib/api';
 import { isJSONObject } from '../lib/tsUtils';
 import { Log } from '../lib/types';
-import { socket } from '../socket';
 
 export const Logs = () => {
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isConnected, setIsConnected] = useState(false);
   const [logSelected, setLogSelected] = useState<Log | null>(null);
   const { data: logs } = useLogs();
-
-  useEffect(() => {
-    socket.on('connect', () => {
-      setIsConnected(true);
-    });
-    socket.on('disconnect', () => {
-      setIsConnected(false);
-    });
-  }, []);
+  const { data: connectionStatus } = useKafkaConnectionStatus();
 
   return (
     <Flex direction={'column'} className="w-full h-full">
@@ -47,8 +37,8 @@ export const Logs = () => {
         p={3}
       >
         <Heading>Logs</Heading>
-        <Badge colorScheme={isConnected ? 'green' : 'red'}>
-          {isConnected ? 'connected' : 'disconnected'}
+        <Badge colorScheme={connectionStatus?.connected ? 'green' : 'red'}>
+          {connectionStatus?.connected ? 'connected' : 'disconnected'}
         </Badge>
       </Flex>
       <Box className="w-full h-full p-3">

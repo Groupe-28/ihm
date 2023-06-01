@@ -16,6 +16,6 @@ COPY . .
 EXPOSE 8150
 
 # Update the command to start the application
-CMD [ "python", "main.py" ]
+CMD [ "python", "app.py" ]
 # Commande pour exécuter l'application
 # CMD [ "flask", "run","--host","0.0.0.0","--port","8150"]

@@ -7,7 +7,8 @@ export class KafkaConsumerController {
 
   @Get('status')
   async getConnectionStatus(): Promise<{ connected: boolean }> {
-    const connected = await this.kafkaConsumerService.checkConnection();
+    const connected =
+      await this.kafkaConsumerService.checkConnectionWithRobot();
     return { connected };
   }
 }

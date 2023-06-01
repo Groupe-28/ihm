@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Consumer, Kafka } from 'kafkajs';
+import { Consumer, Kafka, Producer } from 'kafkajs';
 import { LogsService } from 'src/logs/logs.service';
 
 @Injectable()
@@ -9,6 +9,8 @@ export class KafkaConsumerService implements OnModuleInit {
 
   private kafka: Kafka;
   private consumer: Consumer;
+  private producer: Producer;
+  private robotConnected = false;
 
   async onModuleInit() {
     this.kafka = new Kafka({
@@ -18,13 +20,18 @@ export class KafkaConsumerService implements OnModuleInit {
     });
 
     this.consumer = this.kafka.consumer({ groupId: 'nest-consumer' }); // Update with your desired consumer group ID
+    this.producer = this.kafka.producer();
 
     await this.consumer.connect();
+    await this.producer.connect();
+
     this.consumer.on(this.consumer.events.HEARTBEAT, (event) => {
-      console.log('Heartbeat event', event);
+      //  console.log('Heartbeat event', event);
     });
 
-    await this.consumer.subscribe({ topic: 'logs' }); // Update with your desired topic
+    await this.consumer.subscribe({
+      topics: ['logs', 'connection-status'],
+    });
 
     await this.consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
@@ -32,15 +39,30 @@ export class KafkaConsumerService implements OnModuleInit {
           // transform message.value buffer to string
           const data = JSON.parse(message.value.toString());
           await this.handleLogsTopic(data);
+        } else if (topic === 'connection-status') {
+          const connected = message.value.toString() === 'ok';
+          if (connected !== this.robotConnected) {
+            this.robotConnected = connected;
+            console.log(`Robot connection status: ${connected}`);
+          }
         }
       },
     });
   }
 
-  async checkConnection() {
+  async checkConnectionWithRobot() {
     try {
       await this.kafka.admin().fetchTopicMetadata({ topics: ['logs'] });
-      return true;
+      await this.producer.send({
+        topic: 'connection-status',
+        messages: [
+          {
+            value: 'request',
+          },
+        ],
+      });
+
+      return this.robotConnected;
     } catch (error) {
       console.error(error);
       return false;

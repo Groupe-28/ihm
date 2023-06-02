@@ -33,3 +33,26 @@ model Log {
 
   content String
 }
+
+model GeoObject {
+  id     Int     @id @default(autoincrement())
+  type   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  points Point[]
+}
+
+model Point {
+  id          Int         @id @default(autoincrement())
+  geoObjectId Int
+  geoObject   GeoObject   @relation(fields: [geoObjectId], references: [id])
+  latitude    Float
+  longitude   Float
+  geoActions  GeoAction[]
+}
+
+model GeoAction {
+  id     Int     @id @default(autoincrement())
+  name   String
+  points Point[]
+}

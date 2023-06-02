@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { Log } from './types';
+import { GeoObject, Log } from './types';
 
 export const useLogs = () => {
   return useQuery<Log[], Error>('logs', async () => {
@@ -18,4 +18,11 @@ export const useKafkaConnectionStatus = () => {
       return response.json();
     },
   );
+};
+
+export const useGeoObjects = () => {
+  return useQuery<GeoObject[], Error>('geo-objects', async () => {
+    const response = await fetch(`http://localhost:8000/geo`);
+    return response.json();
+  });
 };

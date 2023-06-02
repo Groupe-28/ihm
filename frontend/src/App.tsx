@@ -13,7 +13,7 @@ import '@fontsource/uncut-sans/500.css';
 import '@fontsource/uncut-sans/600.css';
 import '@fontsource/uncut-sans/700.css';
 import { Logs } from './routes/Logs';
-import { Maps } from './routes/Maps';
+import { MapGl } from './routes/MapGl';
 
 const queryClient = new QueryClient();
 
@@ -28,7 +28,7 @@ function App() {
               <Box width={'full'} height={'100%'}>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/map" element={<Maps />} />
+                  <Route path="/map" element={<MapGl />} />
                   <Route path="/stats" element={<Statistics />} />
                   <Route path="/logs" element={<Logs />} />
                   <Route path="/workers" element={<Workers />} />

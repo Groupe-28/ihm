@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { GeoObject, Log } from './types';
+import { GeoObject, GeoObjectCreateInput, Log } from './types';
 
 export const useLogs = () => {
   return useQuery<Log[], Error>('logs', async () => {
@@ -25,4 +25,20 @@ export const useGeoObjects = () => {
     const response = await fetch(`http://localhost:8000/geo`);
     return response.json();
   });
+};
+
+export const postGeoObject = async (data: GeoObjectCreateInput) => {
+  const response = await fetch(`http://localhost:8000/geo`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      type: data.type,
+      points: {
+        create: data.points,
+      },
+    }),
+  });
+  return response.json();
 };

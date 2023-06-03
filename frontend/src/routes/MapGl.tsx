@@ -3,13 +3,16 @@ import { DrawCreateEvent } from '@mapbox/mapbox-gl-draw';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import { Geometry as DefaultGeometry, GeometryCollection } from 'geojson';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import React from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import Map, {
   GeolocateControl,
   GeolocateControlRef,
-  Marker,
+  Layer,
+  MapRef,
+  Source,
 } from 'react-map-gl';
-import { useGeoObjects } from '../lib/api';
+import { postGeoObject, useGeoObjects } from '../lib/api';
+import { convertToCoordinates } from '../lib/tsUtils';
 import DrawControl from './draw-control';
 
 const MAPBOX_TOKEN =
@@ -29,27 +32,62 @@ export function MapGl() {
     zoom: 18,
   });
 
-  const [geometry, setGeometry] = React.useState<Geometry[]>([]);
-
   const geolocateControlRef = React.useRef<GeolocateControlRef>(null);
 
-  const onCreate = (event: DrawCreateEvent) => {
+  const onCreate = async (event: DrawCreateEvent) => {
     const { features } = event;
-
     if (features.length > 0) {
       const feature = features[0];
       const { geometry } = feature;
       if (geometry.type !== 'GeometryCollection') {
-        setGeometry((prev) => [...prev, geometry]);
+        const response = await postGeoObject({
+          type: geometry.type,
+          points: convertToCoordinates(geometry.coordinates),
+        });
+        console.log(response);
       }
-
-      console.log(geometry);
     }
   };
 
-  React.useEffect(() => {
-    console.log(data);
+  const geometries = useMemo(() => {
+    if (!data) return null;
+
+    const features: any = data.map((item) => ({
+      type: 'Feature',
+      geometry: {
+        type: item.type,
+        coordinates: [
+          item.points.map((point) => [point.latitude, point.longitude]),
+        ],
+      },
+      properties: {
+        id: item.id,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+      },
+    }));
+
+    return (
+      <Source
+        type="geojson"
+        data={{
+          type: 'FeatureCollection',
+          features: features,
+        }}
+      >
+        <Layer id="polygon-layer" type="fill" />
+      </Source>
+    );
   }, [data]);
+
+  const mapRef = useRef<MapRef>(null);
+
+  const onSelectCity = useCallback(
+    ({ longitude, latitude }: { longitude: number; latitude: number }) => {
+      mapRef.current?.flyTo({ center: [latitude, longitude], duration: 300 });
+    },
+    [],
+  );
 
   return (
     <Flex direction="column" className="w-full h-full p-3">
@@ -60,6 +98,12 @@ export function MapGl() {
             <Box
               key={geoObject.id}
               className="flex flex-row justify-start gap-3 items-center w-full p-3"
+              onClick={() =>
+                onSelectCity({
+                  longitude: geoObject.points[0].longitude,
+                  latitude: geoObject.points[0].latitude,
+                })
+              }
             >
               {geoObject.type}
             </Box>
@@ -70,6 +114,7 @@ export function MapGl() {
         <Box className="absolute inset-0 rounded-lg">
           <Map
             {...viewState}
+            ref={mapRef as React.RefObject<MapRef>}
             onMove={(evt) => setViewState(evt.viewState)}
             style={{
               width: '100%',
@@ -80,6 +125,7 @@ export function MapGl() {
             }}
             mapStyle="mapbox://styles/viktorbillaud/cliekb2xi005001qv5b1ocahc"
             mapboxAccessToken={MAPBOX_TOKEN}
+            interactiveLayerIds={['data']}
             onLoad={() => {
               geolocateControlRef.current?.trigger();
             }}
@@ -101,7 +147,7 @@ export function MapGl() {
               showAccuracyCircle
               ref={geolocateControlRef}
             />
-            <Marker longitude={-122.4} latitude={37.8} color="red" />
+            {geometries}
           </Map>
         </Box>
       </Box>

@@ -49,23 +49,27 @@ services:
       volumes:
         - ./python-server:/app
       networks:
-      - fake-local-network
-      - kafka-network
+        - fake-local-network
+        - kafka-network
       depends_on:
         - kafka
 
     kafka:
-      image: bitnami/kafka:latest
-      platform: linux/arm64
+      image: confluentinc/cp-kafka:latest
+      depends_on:
+        - zookeeper
       ports:
-        - "9092:9092"
+        - 29092:29092
       networks:
         - kafka-network
       environment:
-        - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
-        - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
-        - KAFKA_DELETE_TOPIC_ENABLE=true
-        - ALLOW_PLAINTEXT_LISTENER=yes
+        KAFKA_BROKER_ID: 1
+        KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+        KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+        KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+        KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+        KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+        ALLOW_PLAINTEXT_LISTENER: 'yes'
 
     zookeeper:
       image: bitnami/zookeeper:latest
@@ -85,7 +89,7 @@ services:
       ports:
         - "9000:9000"
       environment:
-        - KAFKA_BROKERCONNECT=kafka:9092
+        - KAFKA_BROKERCONNECT=kafka:29092
         - KAFKA_PROPERTIES_CONFLUENT_SUPPORT_METRICS_ENABLE=false
         - KAFKA_PROPERTIES_CONFLUENT_SUPPORT_CUSTOMER_ID=false
         - KAFKA_JVM_OPTS=-Xms16M -Xmx64M

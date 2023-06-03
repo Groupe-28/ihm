@@ -90,7 +90,7 @@ services:
       ports:
         - "9000:9000"
       environment:
-        - KAFKA_BROKERCONNECT=kafka:29092
+        - KAFKA_BROKERCONNECT=kafka:9092
         - KAFKA_PROPERTIES_CONFLUENT_SUPPORT_METRICS_ENABLE=false
         - KAFKA_PROPERTIES_CONFLUENT_SUPPORT_CUSTOMER_ID=false
         - KAFKA_JVM_OPTS=-Xms16M -Xmx64M

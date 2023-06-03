@@ -4,13 +4,13 @@ server = "localhost:29092"
 
 # Kafka consumer configuration
 consumer_config = {
-    "bootstrap.servers": "localhost:29092",
+    "bootstrap.servers": server,
     "group.id": "my_consumer_group",
     "auto.offset.reset": "earliest",
 }
 
 # Kafka producer configuration
-producer_config = {"bootstrap.servers": "localhost:29092"}
+producer_config = {"bootstrap.servers": server}
 
 
 def consume_message():
@@ -29,11 +29,10 @@ def consume_message():
             print(f"Consumer error: {msg.error()}")
             continue
 
-        print(f"Received message: {msg}")
-
         data = msg.value().decode("utf-8")
 
         if data == "request":
+            print("Received request")
             try:
                 produce_message()
             except Exception as e:
@@ -46,6 +45,7 @@ def produce_message():
     try:
         producer = Producer(producer_config)
         producer.produce("connection-status", "ok".encode("utf-8"))
+        print("Send ok")
         producer.flush()
     except Exception as e:
         print(f"Producer error: {str(e)}")

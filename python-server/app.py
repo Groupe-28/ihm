@@ -1,38 +1,25 @@
-from confluent_kafka import Consumer, Producer
+from kafka import KafkaConsumer, KafkaProducer
 
-# server = "localhost:29092" # local
-server = "kafka:9092"
+server = "192.168.1.12:29092"
 
 # Kafka consumer configuration
 consumer_config = {
-    "bootstrap.servers": server,
-    "group.id": "my_consumer_group",
-    "auto.offset.reset": "earliest",
+    "bootstrap_servers": server,
+    "group_id": "my_consumer_group",
+    "auto_offset_reset": "earliest",
 }
 
 # Kafka producer configuration
-producer_config = {"bootstrap.servers": server}
+producer_config = {"bootstrap_servers": server}
 
 
 def consume_message():
-    consumer = Consumer(consumer_config)
-    consumer.subscribe(["connection-status"])
-
+    consumer = KafkaConsumer("connection-status", **consumer_config)
     print("Waiting for messages...")
 
-    while True:
-        msg = consumer.poll(1.0)  # timeout
-
-        if msg is None or msg == {}:
-            continue
-
-        if msg.error():
-            print(f"Consumer error: {msg.error()}")
-            continue
-
-        print(f"Received message: {msg}")
-
-        data = msg.value().decode("utf-8")
+    for msg in consumer:
+        data = msg.value.decode("utf-8")
+        print(f"Received message: {data}")
 
         if data == "request":
             try:
@@ -40,16 +27,11 @@ def consume_message():
             except Exception as e:
                 print(f"Producer error: {str(e)}")
 
-    consumer.close()
-
 
 def produce_message():
-    try:
-        producer = Producer(producer_config)
-        producer.produce("connection-status", "ok".encode("utf-8"))
-        producer.flush()
-    except Exception as e:
-        print(f"Producer error: {str(e)}")
+    producer = KafkaProducer(**producer_config)
+    producer.send("connection-status", b"ok")
+    producer.flush()
 
 
 # main driver function

@@ -75,7 +75,15 @@ export function MapGl() {
           features: features,
         }}
       >
-        <Layer id="polygon-layer" type="fill" />
+        <Layer
+          id="polygon-layer"
+          type="fill"
+          paint={{
+            'fill-color': '#088',
+            'fill-outline-color': '#090',
+            'fill-opacity': 0.8,
+          }}
+        />
       </Source>
     );
   }, [data]);

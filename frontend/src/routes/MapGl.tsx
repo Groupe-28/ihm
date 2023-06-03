@@ -79,9 +79,30 @@ export function MapGl() {
           id="polygon-layer"
           type="fill"
           paint={{
-            'fill-color': '#088',
-            'fill-outline-color': '#090',
-            'fill-opacity': 0.8,
+            'fill-color': '#3AB2D0',
+            'fill-outline-color': '#3AB2D0',
+            'fill-opacity': 0.4,
+          }}
+        />
+        <Layer
+          id="data"
+          type="line"
+          layout={{
+            'line-cap': 'round',
+            'line-join': 'round',
+          }}
+          paint={{
+            'line-dasharray': [0.2, 2],
+            'line-color': '#3AB2D0',
+            'line-width': 3,
+          }}
+        />
+        <Layer
+          id="corner-circles"
+          type="circle"
+          paint={{
+            'circle-radius': 6,
+            'circle-color': '#3AB2D0',
           }}
         />
       </Source>

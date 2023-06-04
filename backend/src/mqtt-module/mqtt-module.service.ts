@@ -32,9 +32,4 @@ export class MqttModuleService {
       });
     }
   }
-
-  async checkConnectionStatus() {
-    await this.publishMessage('connection/status', 'request');
-    return this.robotConnectionStatus;
-  }
 }

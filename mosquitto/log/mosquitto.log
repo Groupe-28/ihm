@@ -169,3 +169,162 @@
 1685883277: New connection from 172.29.0.1:54436 on port 1883.
 1685883277: New client connected from 172.29.0.1:54436 as auto-97BDF457-436B-D7D8-D53C-0C5654112AA6 (p2, c1, k60).
 1685883332: Client auto-97BDF457-436B-D7D8-D53C-0C5654112AA6 closed its connection.
+1685883544: Client auto-E50D2C90-3BB0-412A-71B6-35D2CABE4163 disconnected.
+1685883620: New connection from 172.29.0.1:52364 on port 1883.
+1685883620: New client connected from 172.29.0.1:52364 as auto-598AED84-6AB9-E622-525C-0B6BB7B1E729 (p2, c1, k60).
+1685885007: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1685886808: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1685887064: Client auto-598AED84-6AB9-E622-525C-0B6BB7B1E729 closed its connection.
+1685887272: New connection from 172.29.0.1:54326 on port 1883.
+1685887272: New client connected from 172.29.0.1:54326 as auto-C5C276FB-93B3-F195-BC90-11F73F96055C (p2, c1, k60).
+1685887286: New connection from 172.29.0.1:58494 on port 1883.
+1685887286: New client connected from 172.29.0.1:58494 as auto-5F53C46D-E6B3-C8C9-AF1F-A07BAC2504F9 (p5, c1, k60).
+1685887287: Client auto-5F53C46D-E6B3-C8C9-AF1F-A07BAC2504F9 disconnected.
+1685887297: New connection from 172.29.0.1:32978 on port 1883.
+1685887297: New client connected from 172.29.0.1:32978 as auto-7D8FA299-6631-DBEF-3DB3-D49E9BED5EC1 (p5, c1, k60).
+1685887304: Client auto-C5C276FB-93B3-F195-BC90-11F73F96055C closed its connection.
+1685887305: New connection from 172.29.0.1:40982 on port 1883.
+1685887305: New client connected from 172.29.0.1:40982 as auto-91E4F1B2-BA4C-9F58-4DE1-A46739AAC841 (p2, c1, k60).
+1685887348: Client auto-91E4F1B2-BA4C-9F58-4DE1-A46739AAC841 closed its connection.
+1685887348: New connection from 172.29.0.1:37956 on port 1883.
+1685887348: New client connected from 172.29.0.1:37956 as auto-6C6813A4-81AE-4B5F-B2D9-D255CA2347EB (p2, c1, k60).
+1685887710: Client auto-6C6813A4-81AE-4B5F-B2D9-D255CA2347EB closed its connection.
+1685887711: New connection from 172.29.0.1:55288 on port 1883.
+1685887711: New client connected from 172.29.0.1:55288 as auto-E6C90A58-F413-0A2E-27DD-A62504E0981A (p2, c1, k60).
+1685887716: Client auto-7D8FA299-6631-DBEF-3DB3-D49E9BED5EC1 disconnected.
+1685887717: New connection from 172.29.0.1:38808 on port 1883.
+1685887717: New client connected from 172.29.0.1:38808 as auto-A457C442-2C18-9474-EEFF-FE7DDF4ACCEB (p5, c1, k60).
+1685887724: Client auto-E6C90A58-F413-0A2E-27DD-A62504E0981A closed its connection.
+1685887727: New connection from 172.29.0.1:34570 on port 1883.
+1685887727: New client connected from 172.29.0.1:34570 as auto-3721A58C-94A9-0629-B317-9AF9A25A6A1A (p2, c1, k60).
+1685887737: Client auto-A457C442-2C18-9474-EEFF-FE7DDF4ACCEB disconnected.
+1685887744: New connection from 172.29.0.1:41884 on port 1883.
+1685887744: New client connected from 172.29.0.1:41884 as auto-F1B3773A-75EA-3FA5-7827-EBD9686FE4CF (p5, c1, k60).
+1685887751: Client auto-3721A58C-94A9-0629-B317-9AF9A25A6A1A closed its connection.
+1685887752: New connection from 172.29.0.1:41894 on port 1883.
+1685887752: New client connected from 172.29.0.1:41894 as auto-106B8C18-CCEA-A962-89ED-FAAC6373BD74 (p2, c1, k60).
+1685887757: Client auto-106B8C18-CCEA-A962-89ED-FAAC6373BD74 closed its connection.
+1685887796: New connection from 172.29.0.1:60248 on port 1883.
+1685887796: New client connected from 172.29.0.1:60248 as auto-3724422F-0E7D-6EC1-AAA9-73E3217AD716 (p2, c1, k60).
+1685888609: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1685888784: Client auto-3724422F-0E7D-6EC1-AAA9-73E3217AD716 closed its connection.
+1685888824: Client mqttjs_65913e2b closed its connection.
+1685888824: Client mqttjs_9e5fe836 closed its connection.
+1685888825: New connection from 172.29.0.3:46746 on port 1883.
+1685888825: New client connected from 172.29.0.3:46746 as mqttjs_a821e501 (p2, c1, k60).
+1685888825: Client mqttjs_a821e501 closed its connection.
+1685888826: New connection from 172.29.0.3:46748 on port 1883.
+1685888826: New client connected from 172.29.0.3:46748 as mqttjs_7359aa37 (p2, c1, k60).
+1685888826: Client mqttjs_7359aa37 closed its connection.
+1685888828: New connection from 172.29.0.3:46762 on port 1883.
+1685888828: New client connected from 172.29.0.3:46762 as mqttjs_76a04c33 (p2, c1, k60).
+1685888828: Client mqttjs_76a04c33 closed its connection.
+1685888830: New connection from 172.29.0.3:46768 on port 1883.
+1685888830: New client connected from 172.29.0.3:46768 as mqttjs_a214476f (p2, c1, k60).
+1685888830: Client mqttjs_a214476f closed its connection.
+1685888832: New connection from 172.29.0.3:46772 on port 1883.
+1685888832: New client connected from 172.29.0.3:46772 as mqttjs_88f4fcbd (p2, c1, k60).
+1685888832: Client mqttjs_88f4fcbd closed its connection.
+1685888835: New connection from 172.29.0.3:50114 on port 1883.
+1685888835: New client connected from 172.29.0.3:50114 as mqttjs_b4fec98d (p2, c1, k60).
+1685888836: Client mqttjs_b4fec98d closed its connection.
+1685888841: New connection from 172.29.0.3:50122 on port 1883.
+1685888841: New client connected from 172.29.0.3:50122 as mqttjs_18df652d (p2, c1, k60).
+1685888841: Client mqttjs_18df652d closed its connection.
+1685888848: New connection from 172.29.0.3:44066 on port 1883.
+1685888848: New client connected from 172.29.0.3:44066 as mqttjs_007e6587 (p2, c1, k60).
+1685888849: Client mqttjs_007e6587 closed its connection.
+1685888855: New connection from 172.29.0.3:33252 on port 1883.
+1685888855: New client connected from 172.29.0.3:33252 as mqttjs_2b4456cd (p2, c1, k60).
+1685888866: New connection from 172.29.0.1:43036 on port 1883.
+1685888866: New client connected from 172.29.0.1:43036 as auto-B4B4AAC6-DEC7-4CE6-2BE0-82F826E31459 (p2, c1, k60).
+1685888868: Client auto-B4B4AAC6-DEC7-4CE6-2BE0-82F826E31459 closed its connection.
+1685888875: New connection from 172.29.0.1:48476 on port 1883.
+1685888875: New client connected from 172.29.0.1:48476 as auto-9857BDBD-D2E8-C1AB-C92D-93E46EB108E4 (p2, c1, k60).
+1685888878: Client auto-9857BDBD-D2E8-C1AB-C92D-93E46EB108E4 closed its connection.
+1685888904: Client auto-F1B3773A-75EA-3FA5-7827-EBD9686FE4CF disconnected.
+1685888905: New connection from 172.29.0.1:56644 on port 1883.
+1685888905: New client connected from 172.29.0.1:56644 as auto-FC141BA8-A963-1BD0-2CEB-70E310A8A1BA (p5, c1, k60).
+1685888907: New connection from 172.29.0.1:56672 on port 1883.
+1685888907: New client connected from 172.29.0.1:56672 as auto-AD204AC9-150A-3F6E-EA0F-D2967791E82B (p2, c1, k60).
+1685888908: Client auto-AD204AC9-150A-3F6E-EA0F-D2967791E82B closed its connection.
+1685888909: New connection from 172.29.0.1:56694 on port 1883.
+1685888909: New client connected from 172.29.0.1:56694 as auto-4DECC8EC-C4CA-09CF-D5EE-A15F78DB2AD7 (p2, c1, k60).
+1685888909: Client auto-4DECC8EC-C4CA-09CF-D5EE-A15F78DB2AD7 closed its connection.
+1685889005: Client mqttjs_2b4456cd closed its connection.
+1685889006: New connection from 172.29.0.3:39496 on port 1883.
+1685889006: New client connected from 172.29.0.3:39496 as mqttjs_1d033ed3 (p2, c1, k60).
+1685889030: Client mqttjs_1d033ed3 closed its connection.
+1685889031: New connection from 172.29.0.3:37176 on port 1883.
+1685889031: New connection from 172.29.0.3:37178 on port 1883.
+1685889031: New client connected from 172.29.0.3:37176 as mqttjs_b406f4a5 (p2, c1, k60).
+1685889031: New client connected from 172.29.0.3:37178 as mqttjs_a9c287e7 (p2, c1, k60).
+1685889037: Client auto-FC141BA8-A963-1BD0-2CEB-70E310A8A1BA disconnected.
+1685889039: New connection from 172.29.0.1:37246 on port 1883.
+1685889039: New client connected from 172.29.0.1:37246 as auto-345AD4C0-6041-0309-9973-D1088DD2362D (p5, c1, k60).
+1685889040: Client auto-345AD4C0-6041-0309-9973-D1088DD2362D disconnected.
+1685889043: New connection from 172.29.0.1:37250 on port 1883.
+1685889043: New client connected from 172.29.0.1:37250 as auto-1287A378-0CFB-D49E-73FA-D754F343AF49 (p2, c1, k60).
+1685889044: Client auto-1287A378-0CFB-D49E-73FA-D754F343AF49 closed its connection.
+1685889080: Client mqttjs_a9c287e7 closed its connection.
+1685889080: Client mqttjs_b406f4a5 closed its connection.
+1685889081: New connection from 172.29.0.3:53822 on port 1883.
+1685889081: New connection from 172.29.0.3:53830 on port 1883.
+1685889081: New client connected from 172.29.0.3:53822 as mqttjs_29bd9bb1 (p2, c1, k60).
+1685889081: New client connected from 172.29.0.3:53830 as mqttjs_534b1f4b (p2, c1, k60).
+1685889087: New connection from 172.29.0.1:35752 on port 1883.
+1685889087: New client connected from 172.29.0.1:35752 as auto-4FAF71E6-40B5-0C42-73E4-C6F740730A1D (p2, c1, k60).
+1685889088: Client auto-4FAF71E6-40B5-0C42-73E4-C6F740730A1D closed its connection.
+1685889131: New connection from 172.29.0.1:41790 on port 1883.
+1685889131: New client connected from 172.29.0.1:41790 as auto-9D7AA0F4-5FD0-1FE7-D304-9A1537663027 (p2, c1, k60).
+1685889132: Client auto-9D7AA0F4-5FD0-1FE7-D304-9A1537663027 closed its connection.
+1685889135: Client mqttjs_534b1f4b closed its connection.
+1685889135: Client mqttjs_29bd9bb1 closed its connection.
+1685889136: New connection from 172.29.0.3:40876 on port 1883.
+1685889136: New client connected from 172.29.0.3:40876 as mqttjs_9d4e8d0c (p2, c1, k60).
+1685889139: New connection from 172.29.0.1:60566 on port 1883.
+1685889139: New client connected from 172.29.0.1:60566 as auto-4BE403DC-9627-020A-D9A5-40C7967A63D2 (p2, c1, k60).
+1685889147: New connection from 172.29.0.1:33754 on port 1883.
+1685889147: New client connected from 172.29.0.1:33754 as auto-4CE7463D-F3E4-4727-D4AE-AD1089115D29 (p5, c1, k60).
+1685889148: Client auto-4BE403DC-9627-020A-D9A5-40C7967A63D2 closed its connection.
+1685889149: New connection from 172.29.0.1:33768 on port 1883.
+1685889149: New client connected from 172.29.0.1:33768 as auto-53C9F687-C140-C67A-6DC1-C751B1DE8D49 (p2, c1, k60).
+1685889171: Client auto-53C9F687-C140-C67A-6DC1-C751B1DE8D49 closed its connection.
+1685889173: New connection from 172.29.0.1:44262 on port 1883.
+1685889173: New client connected from 172.29.0.1:44262 as auto-331174E8-0310-6A05-C755-17E6B4389260 (p2, c1, k60).
+1685889181: Client auto-331174E8-0310-6A05-C755-17E6B4389260 closed its connection.
+1685889190: Client mqttjs_9d4e8d0c closed its connection.
+1685889191: New connection from 172.29.0.3:44966 on port 1883.
+1685889191: New client connected from 172.29.0.3:44966 as mqttjs_cc3e42a5 (p2, c1, k60).
+1685889193: New connection from 172.29.0.1:40766 on port 1883.
+1685889193: New client connected from 172.29.0.1:40766 as auto-CD581464-5161-F0A2-9850-48358D0BB91B (p2, c1, k60).
+1685889198: Client auto-CD581464-5161-F0A2-9850-48358D0BB91B closed its connection.
+1685889199: New connection from 172.29.0.1:33320 on port 1883.
+1685889199: New client connected from 172.29.0.1:33320 as auto-0BCA1C2C-CB11-70CC-FB6D-48E4025BA66A (p2, c1, k60).
+1685889200: Client auto-0BCA1C2C-CB11-70CC-FB6D-48E4025BA66A closed its connection.
+1685889302: New connection from 172.29.0.1:55540 on port 1883.
+1685889302: New client connected from 172.29.0.1:55540 as auto-C7DAB2EA-089A-6C15-F917-F4B037B75E32 (p2, c1, k60).
+1685889307: Client auto-C7DAB2EA-089A-6C15-F917-F4B037B75E32 closed its connection.
+1685889307: New connection from 172.29.0.1:41528 on port 1883.
+1685889307: New client connected from 172.29.0.1:41528 as auto-6D7E878C-A626-9B73-230B-E886581746CD (p2, c1, k60).
+1685889330: Client auto-6D7E878C-A626-9B73-230B-E886581746CD closed its connection.
+1685889331: New connection from 172.29.0.1:57250 on port 1883.
+1685889331: New client connected from 172.29.0.1:57250 as auto-E6BAC250-2B5C-DC58-24BC-DA55B00C4FC1 (p2, c1, k60).
+1685889337: Client auto-E6BAC250-2B5C-DC58-24BC-DA55B00C4FC1 closed its connection.
+1685889339: New connection from 172.29.0.1:47210 on port 1883.
+1685889339: New client connected from 172.29.0.1:47210 as auto-7903AD5D-8DB3-A38F-4CD3-5D79EB0E4C26 (p2, c1, k60).
+1685889353: Client auto-7903AD5D-8DB3-A38F-4CD3-5D79EB0E4C26 closed its connection.
+1685889421: New connection from 172.29.0.3:57064 on port 1883.
+1685889421: New client connected from 172.29.0.3:57064 as mqttjs_9e2cfcc3 (p2, c1, k60).
+1685889431: New connection from 172.29.0.1:37300 on port 1883.
+1685889431: New client connected from 172.29.0.1:37300 as auto-7704D23E-E3A4-460E-87F0-0088827FE5B1 (p2, c1, k60).
+1685889451: Client auto-7704D23E-E3A4-460E-87F0-0088827FE5B1 closed its connection.
+1685889460: Client mqttjs_9e2cfcc3 closed its connection.
+1685889460: Client mqttjs_cc3e42a5 closed its connection.
+1685889461: New connection from 172.29.0.3:53936 on port 1883.
+1685889461: New client connected from 172.29.0.3:53936 as mqttjs_31b28715 (p2, c1, k60).
+1685889465: New connection from 172.29.0.1:35554 on port 1883.
+1685889465: New client connected from 172.29.0.1:35554 as auto-BD644F15-D8E4-898E-DED7-E30EC6034E3F (p2, c1, k60).
+1685889473: Client auto-BD644F15-D8E4-898E-DED7-E30EC6034E3F closed its connection.
+1685889477: New connection from 172.29.0.1:40056 on port 1883.
+1685889477: New client connected from 172.29.0.1:40056 as auto-E63894AC-12E3-A2D1-59AF-7E9EC4177896 (p2, c1, k60).

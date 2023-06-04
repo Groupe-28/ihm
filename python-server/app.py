@@ -1,11 +1,21 @@
 import json
-import time
 
 import paho.mqtt.client as mqtt
 
 
+# The callback for when the client successfully connects to the server.
+def on_connect(client, userdata, flags, rc):
+    print(f"Connected with result code: {rc}")
+    # Subscribing in on_connect() means that if we lose the connection and
+    # reconnect then subscriptions will be renewed.
+    client.subscribe("connection/status")
+    if rc == 0:
+        print("Connected successfully")
+        client.publish("connection/status", "connected", qos=1, retain=True)
+
+
 # The callback for when a PUBLISH message is received from the server.
-def on_message(client, userdata, msg: mqtt.MQTTMessage):
+def on_message(client, userdata, msg):
     decoded_message = msg.payload.decode()
     print(f"Received message: {decoded_message}")
 
@@ -13,26 +23,26 @@ def on_message(client, userdata, msg: mqtt.MQTTMessage):
         decoded_message = json.loads(decoded_message)
         print(f"Received message: {decoded_message}")
 
-        if msg.topic == "connection/status" and decoded_message.get("data") == "request":
-            client.publish("connection/status", "ok")
     except json.JSONDecodeError:
         print(f"Received message is not valid JSON: {decoded_message}")
 
 
+broker = "localhost"
+port = 1883
+lwt_topic = "connection/status"
+lwt_message = "disconnected"
+
 client = mqtt.Client()
+client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("localhost", 1883, 60)
+# Configure LWT
+client.will_set(lwt_topic, lwt_message, qos=1, retain=True)
 
-# Subscribing in on_connect() means that if we lose the connection and
-# reconnect then subscriptions will be renewed.
-client.subscribe("connection/status")
+client.connect(broker, port, 60)
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
-client.loop_start()
-
-while True:
-    time.sleep(1)  # Delay for 1 second
+client.loop_forever()

@@ -8,17 +8,18 @@ export class MqttModuleController {
 
   @EventPattern('connection/status')
   public async handleConnectionStatus(data: string) {
-    if (data == 'ok') {
-      this.mqttModuleService.robotConnectionStatus = true;
-      console.log('Robot connected');
-    } else {
-      this.mqttModuleService.robotConnectionStatus = false;
-      console.log('Robot disconnected');
+    switch (data) {
+      case 'connected':
+        this.mqttModuleService.robotConnectionStatus = true;
+        break;
+      case 'disconnected':
+        this.mqttModuleService.robotConnectionStatus = false;
+        break;
     }
   }
 
   @Get('status')
   public async getStatus() {
-    return await this.mqttModuleService.checkConnectionStatus();
+    return await this.mqttModuleService.robotConnectionStatus;
   }
 }

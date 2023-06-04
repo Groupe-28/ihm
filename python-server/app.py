@@ -13,6 +13,9 @@ def on_connect(client, userdata, flags, rc):
         print("Connected successfully")
         client.publish("connection/status", "connected", qos=1, retain=True)
 
+    if rc == 5:
+        print("Authentication failed")
+
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
@@ -38,6 +41,9 @@ client.on_message = on_message
 
 # Configure LWT
 client.will_set(lwt_topic, lwt_message, qos=1, retain=True)
+
+# Connect to broker with username and password
+client.username_pw_set("console", "console")
 
 client.connect(broker, port, 60)
 

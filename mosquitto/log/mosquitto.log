@@ -328,3 +328,206 @@
 1685889473: Client auto-BD644F15-D8E4-898E-DED7-E30EC6034E3F closed its connection.
 1685889477: New connection from 172.29.0.1:40056 on port 1883.
 1685889477: New client connected from 172.29.0.1:40056 as auto-E63894AC-12E3-A2D1-59AF-7E9EC4177896 (p2, c1, k60).
+1685889500: Client auto-E63894AC-12E3-A2D1-59AF-7E9EC4177896 closed its connection.
+1685889534: New connection from 172.29.0.1:56926 on port 1883.
+1685889534: New client connected from 172.29.0.1:56926 as auto-A8E03D96-708B-CBBC-2EC5-56A0AB1526FE (p2, c1, k60).
+1685889540: Client auto-A8E03D96-708B-CBBC-2EC5-56A0AB1526FE closed its connection.
+1685889587: New connection from 172.29.0.1:47826 on port 1883.
+1685889587: New client connected from 172.29.0.1:47826 as auto-87E04D9C-5A73-49AE-1250-358A1230AAAF (p2, c1, k60).
+1685889649: Client auto-4CE7463D-F3E4-4727-D4AE-AD1089115D29 disconnected.
+1685889650: New connection from 172.29.0.1:40990 on port 1883.
+1685889650: New client connected from 172.29.0.1:40990 as auto-03E50E9B-21A9-71BA-9ECE-3BAC2A8F8895 (p5, c1, k60).
+1685889658: Client auto-03E50E9B-21A9-71BA-9ECE-3BAC2A8F8895 disconnected.
+1685889669: mosquitto version 2.0.15 terminating
+1685889669: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1685889670: mosquitto version 2.0.15 starting
+1685889670: Config loaded from /mosquitto/config/mosquitto.conf.
+1685889670: Opening ipv4 listen socket on port 1883.
+1685889670: Opening ipv6 listen socket on port 1883.
+1685889670: Opening websockets listen socket on port 9001.
+1685889670: mosquitto version 2.0.15 running
+1685889670: New connection from 172.29.0.3:55296 on port 1883.
+1685889670: Client mqttjs_31b28715 disconnected, not authorised.
+1685889670: New connection from 172.29.0.1:38614 on port 1883.
+1685889670: Client auto-D5D1EF60-1E13-05E3-C819-CF0568C60C9E disconnected, not authorised.
+1685889671: New connection from 172.29.0.3:55306 on port 1883.
+1685889671: Client mqttjs_31b28715 disconnected, not authorised.
+1685889672: New connection from 172.29.0.3:55310 on port 1883.
+1685889672: Client mqttjs_31b28715 disconnected, not authorised.
+1685889672: New connection from 172.29.0.1:38628 on port 1883.
+1685889672: Client auto-6A058918-7289-92E2-0EE8-E7EE3F10DD8E disconnected, not authorised.
+1685889673: New connection from 172.29.0.3:55320 on port 1883.
+1685889673: Client mqttjs_31b28715 disconnected, not authorised.
+1685889674: New connection from 172.29.0.3:35094 on port 1883.
+1685889674: Client mqttjs_31b28715 disconnected, not authorised.
+1685889675: New connection from 172.29.0.3:35096 on port 1883.
+1685889675: Client mqttjs_31b28715 disconnected, not authorised.
+1685889676: New connection from 172.29.0.3:35112 on port 1883.
+1685889676: Client mqttjs_31b28715 disconnected, not authorised.
+1685889676: New connection from 172.29.0.1:39170 on port 1883.
+1685889676: Client auto-B441AE30-E9C6-2691-277C-734EF64C536C disconnected, not authorised.
+1685889677: New connection from 172.29.0.3:35116 on port 1883.
+1685889677: Client mqttjs_31b28715 disconnected, not authorised.
+1685889678: New connection from 172.29.0.1:39176 on port 1883.
+1685889678: Client auto-35D82A36-ED6C-B6A0-348A-91BE3511BB80 disconnected, not authorised.
+1685889678: New connection from 172.29.0.3:35128 on port 1883.
+1685889678: Client mqttjs_31b28715 disconnected, not authorised.
+1685889679: New connection from 172.29.0.3:35132 on port 1883.
+1685889679: Client mqttjs_31b28715 disconnected, not authorised.
+1685889680: New connection from 172.29.0.3:35148 on port 1883.
+1685889680: Client mqttjs_31b28715 disconnected, not authorised.
+1685889681: New connection from 172.29.0.3:35150 on port 1883.
+1685889681: Client mqttjs_31b28715 disconnected, not authorised.
+1685889682: New connection from 172.29.0.3:35158 on port 1883.
+1685889682: Client mqttjs_31b28715 disconnected, not authorised.
+1685889683: New connection from 172.29.0.3:35166 on port 1883.
+1685889683: Client mqttjs_31b28715 disconnected, not authorised.
+1685889684: New connection from 172.29.0.1:47742 on port 1883.
+1685889684: Client auto-6B5209A9-F4B2-02F7-0FEC-3C7C28D16467 disconnected, not authorised.
+1685889684: New connection from 172.29.0.3:55676 on port 1883.
+1685889684: Client mqttjs_31b28715 disconnected, not authorised.
+1685889685: New connection from 172.29.0.3:55678 on port 1883.
+1685889685: Client mqttjs_31b28715 disconnected, not authorised.
+1685889686: New connection from 172.29.0.3:55692 on port 1883.
+1685889686: Client mqttjs_31b28715 disconnected, not authorised.
+1685889687: New connection from 172.29.0.3:55708 on port 1883.
+1685889687: Client mqttjs_31b28715 disconnected, not authorised.
+1685889688: New connection from 172.29.0.3:55716 on port 1883.
+1685889688: Client mqttjs_31b28715 disconnected, not authorised.
+1685889689: New connection from 172.29.0.3:55732 on port 1883.
+1685889689: Client mqttjs_31b28715 disconnected, not authorised.
+1685889690: New connection from 172.29.0.3:55748 on port 1883.
+1685889690: Client mqttjs_31b28715 disconnected, not authorised.
+1685889692: New connection from 172.29.0.3:55752 on port 1883.
+1685889692: Client mqttjs_31b28715 disconnected, not authorised.
+1685889693: New connection from 172.29.0.3:55762 on port 1883.
+1685889693: Client mqttjs_31b28715 disconnected, not authorised.
+1685889694: New connection from 172.29.0.3:43396 on port 1883.
+1685889694: Client mqttjs_31b28715 disconnected, not authorised.
+1685889695: New connection from 172.29.0.3:43412 on port 1883.
+1685889695: Client mqttjs_31b28715 disconnected, not authorised.
+1685889696: New connection from 172.29.0.3:43414 on port 1883.
+1685889696: Client mqttjs_31b28715 disconnected, not authorised.
+1685889697: New connection from 172.29.0.3:43424 on port 1883.
+1685889697: Client mqttjs_31b28715 disconnected, not authorised.
+1685889698: New connection from 172.29.0.3:43438 on port 1883.
+1685889698: Client mqttjs_31b28715 disconnected, not authorised.
+1685889699: New connection from 172.29.0.3:43444 on port 1883.
+1685889699: Client mqttjs_31b28715 disconnected, not authorised.
+1685889700: New connection from 172.29.0.3:43460 on port 1883.
+1685889700: Client mqttjs_31b28715 disconnected, not authorised.
+1685889700: New connection from 172.29.0.1:42982 on port 1883.
+1685889700: Client auto-A7EF435B-EB41-7FE0-8F87-1958353950EF disconnected, not authorised.
+1685889700: New connection from 172.29.0.1:42996 on port 1883.
+1685889700: Client auto-F0B0433F-F6C0-E94C-4CC9-8F9F97AD88CC disconnected, not authorised.
+1685889701: New connection from 172.29.0.3:43476 on port 1883.
+1685889701: Client mqttjs_31b28715 disconnected, not authorised.
+1685889701: New connection from 172.29.0.1:43002 on port 1883.
+1685889701: Client auto-32103C01-DCC0-D0ED-750B-3685028594F2 disconnected, not authorised.
+1685889702: New connection from 172.29.0.3:43486 on port 1883.
+1685889702: Client mqttjs_31b28715 disconnected, not authorised.
+1685889703: New connection from 172.29.0.3:43500 on port 1883.
+1685889703: Client mqttjs_31b28715 disconnected, not authorised.
+1685889704: New connection from 172.29.0.3:51014 on port 1883.
+1685889704: Client mqttjs_31b28715 disconnected, not authorised.
+1685889705: New connection from 172.29.0.3:51026 on port 1883.
+1685889705: Client mqttjs_31b28715 disconnected, not authorised.
+1685889706: New connection from 172.29.0.3:51036 on port 1883.
+1685889706: Client mqttjs_31b28715 disconnected, not authorised.
+1685889707: New connection from 172.29.0.3:51048 on port 1883.
+1685889707: Client mqttjs_31b28715 disconnected, not authorised.
+1685889708: New connection from 172.29.0.3:51054 on port 1883.
+1685889708: Client mqttjs_31b28715 disconnected, not authorised.
+1685889709: New connection from 172.29.0.3:51064 on port 1883.
+1685889709: Client mqttjs_31b28715 disconnected, not authorised.
+1685889710: New connection from 172.29.0.3:51078 on port 1883.
+1685889710: Client mqttjs_31b28715 disconnected, not authorised.
+1685889711: New connection from 172.29.0.3:51080 on port 1883.
+1685889711: Client mqttjs_31b28715 disconnected, not authorised.
+1685889712: New connection from 172.29.0.3:51092 on port 1883.
+1685889712: Client mqttjs_31b28715 disconnected, not authorised.
+1685889713: New connection from 172.29.0.3:51096 on port 1883.
+1685889713: Client mqttjs_31b28715 disconnected, not authorised.
+1685889714: New connection from 172.29.0.3:32932 on port 1883.
+1685889714: Client mqttjs_31b28715 disconnected, not authorised.
+1685889715: New connection from 172.29.0.3:32946 on port 1883.
+1685889715: Client mqttjs_31b28715 disconnected, not authorised.
+1685889716: New connection from 172.29.0.3:32952 on port 1883.
+1685889716: Client mqttjs_31b28715 disconnected, not authorised.
+1685889717: New connection from 172.29.0.3:32956 on port 1883.
+1685889717: Client mqttjs_31b28715 disconnected, not authorised.
+1685889718: New connection from 172.29.0.3:32968 on port 1883.
+1685889718: Client mqttjs_31b28715 disconnected, not authorised.
+1685889719: New connection from 172.29.0.3:32972 on port 1883.
+1685889719: Client mqttjs_31b28715 disconnected, not authorised.
+1685889720: New connection from 172.29.0.3:32986 on port 1883.
+1685889720: Client mqttjs_31b28715 disconnected, not authorised.
+1685889721: New connection from 172.29.0.3:32988 on port 1883.
+1685889721: Client mqttjs_31b28715 disconnected, not authorised.
+1685889722: New connection from 172.29.0.3:32996 on port 1883.
+1685889722: Client mqttjs_31b28715 disconnected, not authorised.
+1685889723: New connection from 172.29.0.3:33006 on port 1883.
+1685889723: Client mqttjs_31b28715 disconnected, not authorised.
+1685889724: New connection from 172.29.0.3:48282 on port 1883.
+1685889724: Client mqttjs_31b28715 disconnected, not authorised.
+1685889725: New connection from 172.29.0.3:48292 on port 1883.
+1685889725: Client mqttjs_31b28715 disconnected, not authorised.
+1685889726: New connection from 172.29.0.3:48306 on port 1883.
+1685889726: Client mqttjs_31b28715 disconnected, not authorised.
+1685889727: New connection from 172.29.0.3:48312 on port 1883.
+1685889727: Client mqttjs_31b28715 disconnected, not authorised.
+1685889728: New connection from 172.29.0.3:48318 on port 1883.
+1685889728: Client mqttjs_31b28715 disconnected, not authorised.
+1685889729: New connection from 172.29.0.3:48332 on port 1883.
+1685889729: Client mqttjs_31b28715 disconnected, not authorised.
+1685889730: New connection from 172.29.0.3:48336 on port 1883.
+1685889730: Client mqttjs_31b28715 disconnected, not authorised.
+1685889731: New connection from 172.29.0.3:48338 on port 1883.
+1685889731: Client mqttjs_31b28715 disconnected, not authorised.
+1685889732: New connection from 172.29.0.3:48352 on port 1883.
+1685889732: Client mqttjs_31b28715 disconnected, not authorised.
+1685889733: New connection from 172.29.0.1:32902 on port 1883.
+1685889733: Client auto-75CDD6F0-F07A-24B1-71FD-19BF9037BEC9 disconnected, not authorised.
+1685889733: New connection from 172.29.0.3:48368 on port 1883.
+1685889733: Client mqttjs_31b28715 disconnected, not authorised.
+1685889734: New connection from 172.29.0.3:43474 on port 1883.
+1685889734: Client mqttjs_31b28715 disconnected, not authorised.
+1685889735: New connection from 172.29.0.3:43484 on port 1883.
+1685889735: Client mqttjs_31b28715 disconnected, not authorised.
+1685889736: New connection from 172.29.0.3:43494 on port 1883.
+1685889736: Client mqttjs_31b28715 disconnected, not authorised.
+1685889737: New connection from 172.29.0.3:43500 on port 1883.
+1685889737: Client mqttjs_31b28715 disconnected, not authorised.
+1685889738: New connection from 172.29.0.3:43512 on port 1883.
+1685889738: Client mqttjs_31b28715 disconnected, not authorised.
+1685889739: New connection from 172.29.0.3:43516 on port 1883.
+1685889739: Client mqttjs_31b28715 disconnected, not authorised.
+1685889740: New connection from 172.29.0.3:43522 on port 1883.
+1685889740: Client mqttjs_31b28715 disconnected, not authorised.
+1685889741: New connection from 172.29.0.3:43526 on port 1883.
+1685889741: Client mqttjs_31b28715 disconnected, not authorised.
+1685889742: New connection from 172.29.0.3:43534 on port 1883.
+1685889742: Client mqttjs_31b28715 disconnected, not authorised.
+1685889743: New connection from 172.29.0.1:40866 on port 1883.
+1685889743: New client connected from 172.29.0.1:40866 as auto-033BF02E-BB85-A5D0-D22B-8DDC7F6AA582 (p2, c1, k60, u'console').
+1685889743: New connection from 172.29.0.3:43536 on port 1883.
+1685889743: Client mqttjs_31b28715 disconnected, not authorised.
+1685889744: Client auto-033BF02E-BB85-A5D0-D22B-8DDC7F6AA582 closed its connection.
+1685889744: New connection from 172.29.0.3:55802 on port 1883.
+1685889744: Client mqttjs_31b28715 disconnected, not authorised.
+1685889745: New connection from 172.29.0.3:55816 on port 1883.
+1685889745: Client mqttjs_31b28715 disconnected, not authorised.
+1685889746: New connection from 172.29.0.3:55822 on port 1883.
+1685889746: Client mqttjs_31b28715 disconnected, not authorised.
+1685889747: New connection from 172.29.0.3:55826 on port 1883.
+1685889747: Client mqttjs_31b28715 disconnected, not authorised.
+1685889748: New connection from 172.29.0.3:55838 on port 1883.
+1685889748: Client mqttjs_31b28715 disconnected, not authorised.
+1685889749: New connection from 172.29.0.3:55850 on port 1883.
+1685889749: Client mqttjs_31b28715 disconnected, not authorised.
+1685889750: New connection from 172.29.0.3:55860 on port 1883.
+1685889750: Client mqttjs_31b28715 disconnected, not authorised.
+1685889751: New connection from 172.29.0.3:55870 on port 1883.
+1685889751: Client mqttjs_31b28715 disconnected, not authorised.
+1685889752: New connection from 172.29.0.3:55878 on port 1883.
+1685889752: Client mqttjs_31b28715 disconnected, not authorised.

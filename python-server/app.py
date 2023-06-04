@@ -1,56 +1,38 @@
-from confluent_kafka import Consumer, Producer
+import json
+import time
 
-server = "localhost:29092"
-
-# Kafka consumer configuration
-consumer_config = {
-    "bootstrap.servers": server,
-    "group.id": "my_consumer_group",
-    "auto.offset.reset": "earliest",
-}
-
-# Kafka producer configuration
-producer_config = {"bootstrap.servers": server}
+import paho.mqtt.client as mqtt
 
 
-def consume_message():
-    consumer = Consumer(consumer_config)
-    consumer.subscribe(["connection-status"])
+# The callback for when a PUBLISH message is received from the server.
+def on_message(client, userdata, msg: mqtt.MQTTMessage):
+    decoded_message = msg.payload.decode()
+    print(f"Received message: {decoded_message}")
 
-    print("Waiting for messages...")
-
-    while True:
-        msg = consumer.poll(1.0)  # timeout
-
-        if msg is None or msg == {}:
-            continue
-
-        if msg.error():
-            print(f"Consumer error: {msg.error()}")
-            continue
-
-        data = msg.value().decode("utf-8")
-
-        if data == "request":
-            print("Received request")
-            try:
-                produce_message()
-            except Exception as e:
-                print(f"Producer error: {str(e)}")
-
-    consumer.close()
-
-
-def produce_message():
     try:
-        producer = Producer(producer_config)
-        producer.produce("connection-status", "ok".encode("utf-8"))
-        print("Send ok")
-        producer.flush()
-    except Exception as e:
-        print(f"Producer error: {str(e)}")
+        decoded_message = json.loads(decoded_message)
+        print(f"Received message: {decoded_message}")
+
+        if msg.topic == "connection/status" and decoded_message.get("data") == "request":
+            client.publish("connection/status", "ok")
+    except json.JSONDecodeError:
+        print(f"Received message is not valid JSON: {decoded_message}")
 
 
-# main driver function
-if __name__ == "__main__":
-    consume_message()
+client = mqtt.Client()
+client.on_message = on_message
+
+client.connect("localhost", 1883, 60)
+
+# Subscribing in on_connect() means that if we lose the connection and
+# reconnect then subscriptions will be renewed.
+client.subscribe("connection/status")
+
+# Blocking call that processes network traffic, dispatches callbacks and
+# handles reconnecting.
+# Other loop*() functions are available that give a threaded interface and a
+# manual interface.
+client.loop_start()
+
+while True:
+    time.sleep(1)  # Delay for 1 second

@@ -23,6 +23,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/microservices": "^9.4.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-socket.io": "^9.4.2",
     "@nestjs/platform-ws": "^9.4.2",
@@ -30,6 +31,7 @@
     "@prisma/client": "^4.12.0",
     "@types/socket.io": "^3.0.2",
     "kafkajs": "^2.2.4",
+    "mqtt": "^4.3.7",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
     "socket.io": "^4.6.1"

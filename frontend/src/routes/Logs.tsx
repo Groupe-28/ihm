@@ -13,10 +13,10 @@ import {
   useColorMode,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
 import { Table as TableComponent } from '../components';
-import { useKafkaConnectionStatus, useLogs } from '../lib/api';
+import { useLogs, useMqttConnectionStatus } from '../lib/api';
 import { isJSONObject } from '../lib/tsUtils';
 import { Log } from '../lib/types';
 
@@ -25,7 +25,11 @@ export const Logs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [logSelected, setLogSelected] = useState<Log | null>(null);
   const { data: logs } = useLogs();
-  const { data: connectionStatus } = useKafkaConnectionStatus();
+  const { data: robotIsConnected } = useMqttConnectionStatus();
+
+  useEffect(() => {
+    console.log(robotIsConnected);
+  }, [robotIsConnected]);
 
   return (
     <Flex direction={'column'} className="w-full h-full">
@@ -37,8 +41,8 @@ export const Logs = () => {
         p={3}
       >
         <Heading>Logs</Heading>
-        <Badge colorScheme={connectionStatus?.connected ? 'green' : 'red'}>
-          {connectionStatus?.connected ? 'connected' : 'disconnected'}
+        <Badge colorScheme={robotIsConnected ? 'green' : 'red'}>
+          {robotIsConnected ? 'connected' : 'disconnected'}
         </Badge>
       </Flex>
       <Box className="w-full h-full p-3">

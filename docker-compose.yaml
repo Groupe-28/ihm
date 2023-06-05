@@ -40,16 +40,16 @@ services:
       depends_on:
         - backend
 
-    # robot:
-    #   build:
-    #     context: ./python-server
-    #     dockerfile: Dockerfile
-    #   ports:
-    #     - 8150:8150
-    #   volumes:
-    #     - ./python-server:/app
-    #   networks:
-    #     - fake-local-network
+    robot:
+      build:
+        context: ./python-server
+        dockerfile: Dockerfile
+      ports:
+        - 8150:8150
+      volumes:
+        - ./python-server:/app
+      networks:
+        - fake-local-network
 
     mosquitto:
       image: eclipse-mosquitto:2.0

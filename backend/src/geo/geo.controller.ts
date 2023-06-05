@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { GeoService } from './geo.service';
 
@@ -14,5 +14,13 @@ export class GeoController {
   @Post()
   async createGeoObject(@Body() data: Prisma.GeoObjectCreateInput) {
     return this.geoService.createGeoObject(data);
+  }
+
+  @Post('point/actions/:geoPointId')
+  async addGeoActionsToGeoPoint(
+    @Body() geoAction: Prisma.GeoActionCreateInput,
+    @Param('geoPointId') geoPointId: string,
+  ) {
+    return this.geoService.addGeoActionsToGeoPoint(geoPointId, geoAction);
   }
 }

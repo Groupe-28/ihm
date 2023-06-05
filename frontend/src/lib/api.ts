@@ -1,5 +1,11 @@
 import { useQuery } from 'react-query';
-import { GeoObject, GeoObjectCreateInput, Log } from './types';
+import {
+  GeoActionCreateInput,
+  GeoObject,
+  GeoObjectCreateInput,
+  GeoPoint,
+  Log,
+} from './types';
 
 export const useLogs = () => {
   return useQuery<Log[], Error>('logs', async () => {
@@ -38,5 +44,22 @@ export const postGeoObject = async (data: GeoObjectCreateInput) => {
       },
     }),
   });
+  return response.json();
+};
+
+export const postGeoAction = async (
+  geoPointId: number,
+  geoAction: GeoActionCreateInput,
+): Promise<GeoPoint> => {
+  const response = await fetch(
+    `http://localhost:8000/geo/point/actions/${geoPointId}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(geoAction),
+    },
+  );
   return response.json();
 };

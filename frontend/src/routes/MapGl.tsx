@@ -11,8 +11,10 @@ import Map, {
   MapRef,
   Source,
 } from 'react-map-gl';
+import { GeoObjectPanel } from '../components/geo/GeoObjectPanel';
 import { postGeoObject, useGeoObjects } from '../lib/api';
 import { convertToCoordinates } from '../lib/tsUtils';
+import { GeoObject } from '../lib/types';
 import DrawControl from './draw-control';
 
 const MAPBOX_TOKEN =
@@ -25,6 +27,9 @@ type Geometry = WithoutGeometryCollection<DefaultGeometry>;
 
 export function MapGl() {
   const { data } = useGeoObjects();
+  const [selectedGeoObject, setSelectedGeoObject] = React.useState<
+    GeoObject | undefined
+  >(undefined);
 
   const [viewState, setViewState] = React.useState({
     latitude: 48.7,
@@ -118,8 +123,29 @@ export function MapGl() {
     [],
   );
 
+  const handleMapClick = useCallback(
+    (e: mapboxgl.MapLayerMouseEvent) => {
+      // find insides data if the click is inside a polygon
+      const features = mapRef.current?.queryRenderedFeatures(e.point, {
+        layers: ['polygon-layer'],
+      });
+
+      features?.length &&
+        setSelectedGeoObject(
+          data?.find((item) => item.id === features?.[0].properties?.id) ||
+            undefined,
+        );
+    },
+    [data],
+  );
+
   return (
     <Flex direction="column" className="w-full h-full p-3">
+      <GeoObjectPanel
+        geoObject={selectedGeoObject}
+        isOpen={selectedGeoObject !== undefined}
+        onClose={() => setSelectedGeoObject(undefined)}
+      />
       <Box className="flex flex-row justify-start gap-3 items-center w-full p-3">
         {data &&
           data.length > 0 &&
@@ -158,6 +184,7 @@ export function MapGl() {
             onLoad={() => {
               geolocateControlRef.current?.trigger();
             }}
+            onClick={handleMapClick}
           >
             <DrawControl
               displayControlsDefault={false}

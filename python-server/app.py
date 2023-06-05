@@ -30,7 +30,7 @@ def on_message(client, userdata, msg):
         print(f"Received message is not valid JSON: {decoded_message}")
 
 
-broker = "localhost"
+broker = "mosquitto"
 port = 1883
 lwt_topic = "connection/status"
 lwt_message = "disconnected"

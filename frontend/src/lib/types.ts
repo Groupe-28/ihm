@@ -21,6 +21,16 @@ export type GeoPoint = {
   geoObjectId: number;
   latitude: number;
   longitude: number;
+  geoActions: GeoAction[];
+};
+
+export type GeoAction = {
+  id: number;
+  name: string;
+};
+
+export type GeoActionCreateInput = {
+  name: string;
 };
 
 export type GeoPointCreateInput = {

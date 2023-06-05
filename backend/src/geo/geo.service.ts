@@ -13,7 +13,11 @@ export class GeoService {
   async listGeoObjects() {
     const geoObjects = await this.prismaService.geoObject.findMany({
       include: {
-        points: true,
+        points: {
+          include: {
+            geoActions: true,
+          },
+        },
       },
     });
     this.logsService.createLog({
@@ -32,5 +36,32 @@ export class GeoService {
       content: JSON.stringify(geoObject),
     });
     return geoObject;
+  }
+
+  async addGeoActionsToGeoPoint(
+    geoPointId: string,
+    geoAction: Prisma.GeoActionCreateInput,
+  ) {
+    console.log(geoPointId, geoAction);
+    const geoPoint = await this.prismaService.point.update({
+      where: {
+        id: parseInt(geoPointId),
+      },
+      data: {
+        geoActions: {
+          create: geoAction,
+        },
+      },
+      include: {
+        geoActions: true,
+      },
+    });
+
+    this.logsService.createLog({
+      title: 'addGeoActionsToGeoPoint',
+      content: JSON.stringify(geoPoint),
+    });
+
+    return geoPoint;
   }
 }

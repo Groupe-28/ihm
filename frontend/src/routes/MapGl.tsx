@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, useDisclosure } from '@chakra-ui/react';
 import { DrawCreateEvent } from '@mapbox/mapbox-gl-draw';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import { Geometry as DefaultGeometry, GeometryCollection } from 'geojson';
@@ -11,9 +11,9 @@ import Map, {
   MapRef,
   Source,
 } from 'react-map-gl';
+import { CreateGeoObjectModal } from '../components/geo/CreateGeoObjectModal';
 import { GeoObjectPanel } from '../components/geo/GeoObjectPanel';
-import { postGeoObject, useGeoObjects } from '../lib/api';
-import { convertToCoordinates } from '../lib/tsUtils';
+import { useGeoObjects } from '../lib/api';
 import { GeoObject } from '../lib/types';
 import DrawControl from './draw-control';
 
@@ -26,7 +26,7 @@ export type WithoutGeometryCollection<T extends DefaultGeometry> =
 type Geometry = WithoutGeometryCollection<DefaultGeometry>;
 
 export function MapGl() {
-  const { data } = useGeoObjects();
+  const { data, refetch } = useGeoObjects();
   const [selectedGeoObject, setSelectedGeoObject] = React.useState<
     GeoObject | undefined
   >(undefined);
@@ -39,20 +39,25 @@ export function MapGl() {
 
   const geolocateControlRef = React.useRef<GeolocateControlRef>(null);
 
-  const onCreate = async (event: DrawCreateEvent) => {
-    const { features } = event;
-    if (features.length > 0) {
-      const feature = features[0];
-      const { geometry } = feature;
-      if (geometry.type !== 'GeometryCollection') {
-        const response = await postGeoObject({
-          type: geometry.type,
-          points: convertToCoordinates(geometry.coordinates),
-        });
-        console.log(response);
-      }
+  // CREATE GEO OBJECT MODAL
+  const {
+    isOpen: createGeoObjectModalIsOpen,
+    onOpen: openGeoObjectModalOpen,
+    onClose: closeGeoObjectModalOpen,
+  } = useDisclosure();
+  const [drawEventToHandle, setDrawEventToHandle] = React.useState<
+    DrawCreateEvent | undefined
+  >(undefined);
+
+  React.useEffect(() => {
+    if (drawEventToHandle) {
+      openGeoObjectModalOpen();
+    } else {
+      closeGeoObjectModalOpen();
     }
-  };
+  }, [drawEventToHandle]);
+
+  // GEOJSON OBJECTS
 
   const geometries = useMemo(() => {
     if (!data) return null;
@@ -61,9 +66,10 @@ export function MapGl() {
       type: 'Feature',
       geometry: {
         type: item.type,
-        coordinates: [
-          item.points.map((point) => [point.latitude, point.longitude]),
-        ],
+        coordinates:
+          item.type === 'Polygon'
+            ? [item.points.map((point) => [point.latitude, point.longitude])]
+            : item.points.map((point) => [point.latitude, point.longitude]),
       },
       properties: {
         id: item.id,
@@ -71,6 +77,8 @@ export function MapGl() {
         updatedAt: item.updatedAt,
       },
     }));
+
+    console.log(features);
 
     return (
       <Source
@@ -83,6 +91,7 @@ export function MapGl() {
         <Layer
           id="polygon-layer"
           type="fill"
+          filter={['==', '$type', 'Polygon']}
           paint={{
             'fill-color': '#3AB2D0',
             'fill-outline-color': '#3AB2D0',
@@ -90,7 +99,7 @@ export function MapGl() {
           }}
         />
         <Layer
-          id="data"
+          id="line-layer"
           type="line"
           layout={{
             'line-cap': 'round',
@@ -127,7 +136,7 @@ export function MapGl() {
     (e: mapboxgl.MapLayerMouseEvent) => {
       // find insides data if the click is inside a polygon
       const features = mapRef.current?.queryRenderedFeatures(e.point, {
-        layers: ['polygon-layer'],
+        layers: ['polygon-layer', 'line-layer'],
       });
 
       features?.length &&
@@ -140,19 +149,18 @@ export function MapGl() {
   );
 
   return (
-    <Flex direction="column" className="w-full h-full p-3">
+    <Flex direction="row" className="w-full h-full p-3">
       <GeoObjectPanel
         geoObject={selectedGeoObject}
         isOpen={selectedGeoObject !== undefined}
         onClose={() => setSelectedGeoObject(undefined)}
       />
-      <Box className="flex flex-row justify-start gap-3 items-center w-full p-3">
-        {data &&
-          data.length > 0 &&
+      <Box className="my-2 flex flex-col justify-start gap-3 items-center w-1/5 h-full">
+        {data && data.length > 0 ? (
           data.map((geoObject) => (
             <Box
               key={geoObject.id}
-              className="flex flex-row justify-start gap-3 items-center w-full p-3"
+              className="w-full flex flex-row justify-center gap-3 items-center px-3 py-3"
               onClick={() =>
                 onSelectCity({
                   longitude: geoObject.points[0].longitude,
@@ -160,9 +168,22 @@ export function MapGl() {
                 })
               }
             >
-              {geoObject.type}
+              <Text fontWeight={'bold'} lineHeight={'10px'}>
+                {geoObject.name}
+              </Text>
+              <Button
+                onClick={() => setSelectedGeoObject(geoObject)}
+                className="ml-auto"
+              >
+                Edit
+              </Button>
             </Box>
-          ))}
+          ))
+        ) : (
+          <Box>
+            <Text>No data</Text>
+          </Box>
+        )}
       </Box>
 
       <Box className="relative w-full h-full rounded-lg">
@@ -176,11 +197,11 @@ export function MapGl() {
               height: '100%',
               borderRadius: '10px',
               boxShadow: '0 0 10px rgba(0,0,0,0.5)',
-              border: '1px solid rgba(0,0,0,0.1)',
+              // border: '1px solid rgba(0,0,0,0.1)',
             }}
             mapStyle="mapbox://styles/viktorbillaud/cliekb2xi005001qv5b1ocahc"
             mapboxAccessToken={MAPBOX_TOKEN}
-            interactiveLayerIds={['data']}
+            interactiveLayerIds={['line-layer', 'polygon-layer']}
             onLoad={() => {
               geolocateControlRef.current?.trigger();
             }}
@@ -188,7 +209,7 @@ export function MapGl() {
           >
             <DrawControl
               displayControlsDefault={false}
-              onCreate={onCreate}
+              onCreate={(event) => setDrawEventToHandle(event)}
               controls={{
                 polygon: true,
                 trash: true,
@@ -205,6 +226,19 @@ export function MapGl() {
             />
             {geometries}
           </Map>
+          <CreateGeoObjectModal
+            isOpen={createGeoObjectModalIsOpen}
+            event={drawEventToHandle}
+            onClose={() => {
+              setDrawEventToHandle(undefined);
+              closeGeoObjectModalOpen();
+            }}
+            onGeoObjectCreated={() => {
+              setDrawEventToHandle(undefined);
+              closeGeoObjectModalOpen();
+              refetch();
+            }}
+          />
         </Box>
       </Box>
     </Flex>

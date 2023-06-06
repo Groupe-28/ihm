@@ -10,7 +10,6 @@ import {
   Card,
   Drawer,
   DrawerBody,
-  DrawerCloseButton,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
@@ -85,6 +84,8 @@ export const GeoObjectPanel: React.FC<TPanelProps> = ({
     }
   };
 
+  const { colorMode } = useColorMode();
+
   return (
     <Drawer
       isOpen={isOpenParams}
@@ -94,8 +95,9 @@ export const GeoObjectPanel: React.FC<TPanelProps> = ({
     >
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerCloseButton />
-        <DrawerHeader>{geoObjectState?.id}</DrawerHeader>
+        <DrawerHeader backgroundColor={colors.brand[500]} color={'white'}>
+          {geoObjectState?.name}
+        </DrawerHeader>
 
         <DrawerBody>
           <Flex gap={3} direction="row" className="py-3">
@@ -111,7 +113,7 @@ export const GeoObjectPanel: React.FC<TPanelProps> = ({
             )}
           </Flex>
 
-          <Flex gap={3} direction="column">
+          <Flex gap={0} direction="column">
             {geoObjectState &&
               geoObjectState.points.map((point, index) => (
                 <PointCard
@@ -123,11 +125,20 @@ export const GeoObjectPanel: React.FC<TPanelProps> = ({
           </Flex>
         </DrawerBody>
 
-        <DrawerFooter>
+        <DrawerFooter
+          borderTop={
+            '1px solid' +
+            (colorMode === 'dark' ? colors.default[600] : colors.default[100])
+          }
+        >
           <Button variant="outline" mr={3} onClick={onClosePanel}>
             Cancel
           </Button>
-          <Button backgroundColor={colors.brand[500]} color={'white'}>
+          <Button
+            backgroundColor={colors.brand[500]}
+            color={'white'}
+            onClick={onClosePanel}
+          >
             Save
           </Button>
         </DrawerFooter>
@@ -147,54 +158,67 @@ const PointCard: React.FC<{
   const { colorMode } = useColorMode();
 
   return (
-    <Card
-      className="p-3"
-      border={'1px solid'}
-      borderColor={
-        colorMode === 'dark' ? colors.default[600] : colors.default[100]
-      }
+    <Flex
+      direction="row"
+      className="w-full"
+      gap={3}
+      key={point.id}
+      alignItems={'stretch'}
+      justifyContent={'center'}
     >
-      <Flex gap={0} direction="column">
-        <Flex
-          gap={3}
-          direction="row"
-          alignItems={'center'}
-          justifyContent={'space-between'}
-        >
-          <Text size="md" fontWeight={'bold'}>
-            {index + 1}
-          </Text>
-          <CreateActionModal
-            pointId={point.id}
-            onCreateActionButtonClicked={onCreateActionButtonClicked}
-          />
+      <PointMarker text={index + 1} />
+      <Card
+        className="w-full p-3 my-2"
+        border={'1px solid'}
+        borderColor={
+          colorMode === 'dark' ? colors.default[600] : colors.default[100]
+        }
+      >
+        <Flex gap={0} direction="column">
+          <Flex
+            gap={3}
+            direction="row"
+            alignItems={'center'}
+            justifyContent={'space-between'}
+          >
+            <CreateActionModal
+              pointId={point.id}
+              onCreateActionButtonClicked={onCreateActionButtonClicked}
+            />
+          </Flex>
+          {point.geoActions.length > 0 && (
+            <Accordion
+              allowMultiple
+              mt={3}
+              rounded={'md'}
+              border={'transparent'}
+            >
+              <AccordionItem rounded={'md'}>
+                <h2>
+                  <AccordionButton
+                    _expanded={{ bg: colors.default[500], color: 'white' }}
+                    rounded={'md'}
+                  >
+                    <Box as="span" flex="1" textAlign="left">
+                      Show related actions{' '}
+                      <strong>({point.geoActions.length})</strong>
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  {point.geoActions.map((action, index) => (
+                    <Text size="md" fontWeight={'bold'}>
+                      {action.name}
+                    </Text>
+                  ))}
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          )}
         </Flex>
-        {point.geoActions.length > 0 && (
-          <Accordion allowMultiple mt={3} rounded={'md'}>
-            <AccordionItem rounded={'md'}>
-              <h2>
-                <AccordionButton
-                  _expanded={{ bg: colors.default[500], color: 'white' }}
-                  rounded={'md'}
-                >
-                  <Box as="span" flex="1" textAlign="left">
-                    Show related actions
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4}>
-                {point.geoActions.map((action, index) => (
-                  <Text size="md" fontWeight={'bold'}>
-                    {action.name}
-                  </Text>
-                ))}
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
-        )}
-      </Flex>
-    </Card>
+      </Card>
+    </Flex>
   );
 };
 
@@ -224,7 +248,9 @@ const CreateActionModal: React.FC<{
       <PopoverContent
         color="white"
         bg={colors.brand[700]}
-        borderColor={colors.brand[700]}
+        borderWidth={2}
+        borderColor={'white'}
+        boxShadow={'xlg'}
       >
         <PopoverHeader pt={4} fontWeight="bold" border="0">
           Create a new action
@@ -264,5 +290,53 @@ const CreateActionModal: React.FC<{
         </PopoverFooter>
       </PopoverContent>
     </Popover>
+  );
+};
+
+export const PointMarker: React.FC<{
+  text?: string | number;
+}> = ({ text }) => {
+  const { colorMode } = useColorMode();
+
+  return (
+    <Flex alignItems={'center'} justifyContent={'center'} direction={'column'}>
+      <Box
+        style={{
+          width: '2px',
+          height: '100%',
+          borderLeft: `4px dotted ${colors.brand[500]}`,
+          marginLeft: '2px',
+          opacity: 0.5,
+        }}
+      />
+      <Box>
+        <div
+          style={{
+            width: '22px',
+            height: '22px',
+            textAlign: 'center',
+            borderRadius: '50%',
+            backgroundColor: colors.brand[500],
+            marginLeft: '2px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Text fontSize={'xs'} fontWeight={'bold'} color={'white'}>
+            {text}
+          </Text>
+        </div>
+      </Box>
+      <Box
+        style={{
+          width: '2px',
+          height: '100%',
+          borderLeft: `4px dotted ${colors.brand[500]}`,
+          marginLeft: '2px',
+          opacity: 0.5,
+        }}
+      />
+    </Flex>
   );
 };

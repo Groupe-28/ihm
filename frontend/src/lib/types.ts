@@ -10,6 +10,7 @@ export type Log = {
 
 export type GeoObject = {
   id: number;
+  name: string;
   type: Geometry['type'];
   createdAt: Date;
   updatedAt: Date;
@@ -21,6 +22,7 @@ export type GeoPoint = {
   geoObjectId: number;
   latitude: number;
   longitude: number;
+  name: string;
   geoActions: GeoAction[];
 };
 
@@ -40,5 +42,6 @@ export type GeoPointCreateInput = {
 
 export type GeoObjectCreateInput = {
   type: string;
+  name: string;
   points?: GeoPointCreateInput[];
 };

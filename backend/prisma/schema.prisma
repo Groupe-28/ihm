@@ -37,6 +37,7 @@ model Log {
 model GeoObject {
   id     Int     @id @default(autoincrement())
   type   String
+  name   String 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
   points Point[]

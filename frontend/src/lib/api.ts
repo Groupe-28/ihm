@@ -39,6 +39,7 @@ export const postGeoObject = async (data: GeoObjectCreateInput) => {
     },
     body: JSON.stringify({
       type: data.type,
+      name: data.name,
       points: {
         create: data.points,
       },

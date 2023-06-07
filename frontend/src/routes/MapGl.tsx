@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Card, Flex, Text, useDisclosure } from '@chakra-ui/react';
 import { DrawCreateEvent } from '@mapbox/mapbox-gl-draw';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import { Geometry as DefaultGeometry, GeometryCollection } from 'geojson';
@@ -13,8 +13,10 @@ import Map, {
 } from 'react-map-gl';
 import { CreateGeoObjectModal } from '../components/geo/CreateGeoObjectModal';
 import { GeoObjectPanel } from '../components/geo/GeoObjectPanel';
+import RobotMarker from '../components/geo/RobotMarker';
 import { useGeoObjects } from '../lib/api';
 import { GeoObject } from '../lib/types';
+import useRobotLocalization from '../lib/useRobotLocalization';
 import DrawControl from './draw-control';
 
 const MAPBOX_TOKEN =
@@ -148,6 +150,12 @@ export function MapGl() {
     [data],
   );
 
+  const {
+    data: robotLocalization,
+    isConnected: robotIsConnected,
+    error: robotError,
+  } = useRobotLocalization();
+
   return (
     <Flex direction="row" className="w-full h-full p-3">
       <GeoObjectPanel
@@ -185,8 +193,32 @@ export function MapGl() {
           </Box>
         )}
       </Box>
-
       <Box className="relative w-full h-full rounded-lg">
+        <Box className="absolute top-0 left-0 p-2" zIndex={200}>
+          <Card
+            padding={3}
+            display={'flex'}
+            direction={'row'}
+            gap={2}
+            alignItems={'center'}
+            justifyContent={'center'}
+          >
+            {robotIsConnected ? (
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+            ) : (
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+              </span>
+            )}
+            <Text fontWeight={'bold'} lineHeight={'10px'}>
+              {robotIsConnected ? 'Connected' : 'Disconnected'}
+            </Text>
+          </Card>
+        </Box>
         <Box className="absolute inset-0 rounded-lg">
           <Map
             {...viewState}
@@ -207,6 +239,9 @@ export function MapGl() {
             }}
             onClick={handleMapClick}
           >
+            {robotIsConnected && robotLocalization && (
+              <RobotMarker robotLocalization={robotLocalization} />
+            )}
             <DrawControl
               displayControlsDefault={false}
               onCreate={(event) => setDrawEventToHandle(event)}
@@ -216,7 +251,6 @@ export function MapGl() {
                 line_string: true,
               }}
             />
-
             <GeolocateControl
               positionOptions={{ enableHighAccuracy: true }}
               trackUserLocation

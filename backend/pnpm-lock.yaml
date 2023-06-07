@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@drivetech/node-nmea': ^2.0.1
   '@nestjs/cli': ^9.0.0
   '@nestjs/common': ^9.0.0
   '@nestjs/config': ^2.3.1
@@ -23,6 +24,7 @@ specifiers:
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
+  gps: ^0.6.1
   jest: 29.5.0
   kafkajs: ^2.2.4
   mqtt: ^4.3.7
@@ -41,6 +43,7 @@ specifiers:
   webpack: ^5.79.0
 
 dependencies:
+  '@drivetech/node-nmea': 2.0.1
   '@nestjs/common': 9.4.0_mnr6j2del53muneqly5h4y27ai
   '@nestjs/config': 2.3.1_ojtg6vwerx6d3743ed2mz2c5uy
   '@nestjs/core': 9.4.0_4pjecf4mryafyjqyiqaidyfqk4
@@ -51,6 +54,7 @@ dependencies:
   '@nestjs/websockets': 9.4.2_4c5shqcbne6zhjqekaf2oucwq4
   '@prisma/client': 4.12.0_prisma@4.12.0
   '@types/socket.io': 3.0.2
+  gps: 0.6.1
   kafkajs: 2.2.4
   mqtt: 4.3.7
   reflect-metadata: 0.1.13
@@ -542,6 +546,11 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
+
+  /@drivetech/node-nmea/2.0.1:
+    resolution: {integrity: sha512-WFlw6iNx43SCE+xW3j69SzDwQz7dXZ0LyfQtLQyrFQFW0qXkLRhcRG/cxlPiNhSG34FJumLr3wq0aaP2A1+OQA==}
+    engines: {node: '>=8'}
+    dev: false
 
   /@eslint-community/eslint-utils/4.4.0_eslint@8.38.0:
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
@@ -3000,6 +3009,10 @@ packages:
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
+
+  /gps/0.6.1:
+    resolution: {integrity: sha512-PP6OPLQnuQhIsYHrzq2BbutcjNgiaUk/lj3NXsnolybg/Y45bCXv2e6V8uVviLNugHwREYqaQlJIatoqOItAJA==}
+    dev: false
 
   /graceful-fs/4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}

@@ -10,7 +10,7 @@ import pynmea2
 # NMEA Client
 def tcp_client(mqtt_client):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(("127.0.0.1", 10110))
+    client.connect(("host.docker.internal", 10110))
 
     while True:
         try:
@@ -56,7 +56,7 @@ def on_message(client, userdata, msg):
 
 def main():
     # MQTT Client setup
-    broker = "localhost"
+    broker = "mosquitto"
     port = 1883
     lwt_topic = "connection/status"
     lwt_message = "disconnected"

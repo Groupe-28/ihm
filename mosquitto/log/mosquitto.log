@@ -1235,3 +1235,42 @@
 1686157028: Client auto-09919914-F630-BEDB-FBCF-EC753FBDF2EF closed its connection.
 1686157032: New connection from 172.29.0.1:60280 on port 1883.
 1686157032: New client connected from 172.29.0.1:60280 as auto-3D3AD9F3-B952-9027-7057-F39E325809D4 (p2, c1, k60, u'console').
+1686157221: Client mqttjs_d192676a closed its connection.
+1686157287: New connection from 172.29.0.5:54662 on port 1883.
+1686157287: New client connected from 172.29.0.5:54662 as mqttjs_7cd426d0 (p2, c1, k60, u'console').
+1686157287: Client mqttjs_7cd426d0 closed its connection.
+1686157288: New connection from 172.29.0.3:36808 on port 1883.
+1686157288: New client connected from 172.29.0.3:36808 as mqttjs_3a33f539 (p2, c1, k60, u'console').
+1686157288: Client mqttjs_3a33f539 closed its connection.
+1686157290: New connection from 172.29.0.3:36824 on port 1883.
+1686157290: New client connected from 172.29.0.3:36824 as mqttjs_c2508cac (p2, c1, k60, u'console').
+1686157324: mosquitto version 2.0.15 terminating
+1686157324: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1686157337: mosquitto version 2.0.15 starting
+1686157337: Config loaded from /mosquitto/config/mosquitto.conf.
+1686157337: Opening ipv4 listen socket on port 1883.
+1686157337: Opening ipv6 listen socket on port 1883.
+1686157337: Opening websockets listen socket on port 9001.
+1686157337: mosquitto version 2.0.15 running
+1686157338: New connection from 172.29.0.5:59344 on port 1883.
+1686157338: New client connected from 172.29.0.5:59344 as mqttjs_2342e111 (p2, c1, k60, u'console').
+1686157338: Client mqttjs_2342e111 closed its connection.
+1686157339: New connection from 172.29.0.1:39194 on port 1883.
+1686157339: New client connected from 172.29.0.1:39194 as auto-2788FCFF-1875-1EBE-0BC8-6375517FFA35 (p2, c1, k60, u'console').
+1686157339: New connection from 172.29.0.3:39820 on port 1883.
+1686157339: New client connected from 172.29.0.3:39820 as mqttjs_f5aacaee (p2, c1, k60, u'console').
+1686157340: Client mqttjs_f5aacaee closed its connection.
+1686157341: New connection from 172.29.0.3:41020 on port 1883.
+1686157341: New client connected from 172.29.0.3:41020 as mqttjs_cee8de8d (p2, c1, k60, u'console').
+1686157449: Client auto-2788FCFF-1875-1EBE-0BC8-6375517FFA35 closed its connection.
+1686157495: New connection from 172.29.0.5:46647 on port 1883.
+1686157495: New client connected from 172.29.0.5:46647 as auto-6F66092B-8D20-41BB-48DA-0E4062BA3CDF (p2, c1, k60, u'console').
+1686157529: Client auto-6F66092B-8D20-41BB-48DA-0E4062BA3CDF closed its connection.
+1686157530: New connection from 172.29.0.5:37489 on port 1883.
+1686157530: New client connected from 172.29.0.5:37489 as auto-5C368D0A-959D-B9FD-2C59-79A0A151FE18 (p2, c1, k60, u'console').
+1686157809: Client auto-5C368D0A-959D-B9FD-2C59-79A0A151FE18 closed its connection.
+1686157810: New connection from 172.29.0.5:57423 on port 1883.
+1686157810: New client connected from 172.29.0.5:57423 as auto-A5E07E6B-2E38-955B-AD16-22245931CCDB (p2, c1, k60, u'console').
+1686157917: Client auto-A5E07E6B-2E38-955B-AD16-22245931CCDB closed its connection.
+1686157918: New connection from 172.29.0.5:43335 on port 1883.
+1686157918: New client connected from 172.29.0.5:43335 as auto-30351BAE-F5A3-53B1-1C87-E639B2880319 (p2, c1, k60, u'console').

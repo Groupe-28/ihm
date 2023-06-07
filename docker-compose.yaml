@@ -48,6 +48,7 @@ services:
         dockerfile: Dockerfile
       ports:
         - 8150:8150
+        - 10110:10110
       volumes:
         - ./python-server:/app
       networks:

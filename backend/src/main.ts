@@ -11,6 +11,7 @@ async function bootstrap() {
       url: 'mqtt://mosquitto:1883',
       username: 'console',
       password: 'console',
+      retain: false,
     },
   });
 

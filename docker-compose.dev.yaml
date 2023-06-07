@@ -16,13 +16,17 @@ services:
           - "5432:5432"
 
     backend:
-      build: ./backend
+      build: 
+        context: ./backend
+        dockerfile: Dockerfile.dev
       restart: unless-stopped
       networks:
         - fake-local-network
         # - kafka-network
       env_file:
         - ./backend/docker.env
+      volumes:
+        - ./backend:/usr/src/app
       ports:
         - "8000:8000"
       depends_on:

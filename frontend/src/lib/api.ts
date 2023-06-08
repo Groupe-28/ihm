@@ -15,13 +15,11 @@ export const useLogs = () => {
 };
 
 export const useMqttConnectionStatus = () => {
-  return useQuery<{ connected: boolean }, Error>(
-    'kafka-connection-status',
-    async () => {
-      const response = await fetch(`http://localhost:8000/mqtt-module/status`);
-      return response.json();
-    },
-  );
+  return useQuery<boolean, Error>('kafka-connection-status', async () => {
+    const response = await fetch(`http://localhost:8000/mqtt-module/status`);
+    const data = await response.json();
+    return data;
+  });
 };
 
 export const useGeoObjects = () => {

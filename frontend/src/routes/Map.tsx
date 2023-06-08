@@ -1,7 +1,6 @@
-import { Box, Button, Card, Flex, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, useDisclosure } from '@chakra-ui/react';
 import { DrawCreateEvent } from '@mapbox/mapbox-gl-draw';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
-import { Geometry as DefaultGeometry, GeometryCollection } from 'geojson';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useCallback, useMemo, useRef } from 'react';
 import Map, {
@@ -11,37 +10,44 @@ import Map, {
   MapRef,
   Source,
 } from 'react-map-gl';
+import { ConnectionCard } from '../components/ConnexionCard';
 import { CreateGeoObjectModal } from '../components/geo/CreateGeoObjectModal';
 import { GeoObjectPanel } from '../components/geo/GeoObjectPanel';
 import RobotMarker from '../components/geo/RobotMarker';
-import { useGeoObjects } from '../lib/api';
+import { useGeoObjects, useMqttConnectionStatus } from '../lib/api';
+import DrawControl from '../lib/draw-control';
 import { GeoObject } from '../lib/types';
 import useRobotLocalization from '../lib/useRobotLocalization';
-import DrawControl from './draw-control';
 
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoidmlrdG9yYmlsbGF1ZCIsImEiOiJjbGllazQ4cXQwNmJrM3B0NGJlazJlY3Q0In0.Gx4d9o-bn0Rm2lxAchu6kw';
 
-export type WithoutGeometryCollection<T extends DefaultGeometry> =
-  T extends GeometryCollection ? never : T;
-
-type Geometry = WithoutGeometryCollection<DefaultGeometry>;
-
-export function MapGl() {
-  const { data, refetch } = useGeoObjects();
-  const [selectedGeoObject, setSelectedGeoObject] = React.useState<
-    GeoObject | undefined
-  >(undefined);
+export function MapPage() {
+  // MAP STATES
 
   const [viewState, setViewState] = React.useState({
     latitude: 48.7,
     longitude: 2.36,
     zoom: 18,
   });
-
   const geolocateControlRef = React.useRef<GeolocateControlRef>(null);
+  const mapRef = useRef<MapRef>(null);
+
+  // DATA STATES
+
+  const { data, refetch } = useGeoObjects();
+  const [selectedGeoObject, setSelectedGeoObject] = React.useState<
+    GeoObject | undefined
+  >(undefined);
+  const {
+    data: robotLocalization,
+    isConnected: robotIsConnected,
+    error: robotError,
+  } = useRobotLocalization();
+  const { data: serverSocketConnexion } = useMqttConnectionStatus();
 
   // CREATE GEO OBJECT MODAL
+
   const {
     isOpen: createGeoObjectModalIsOpen,
     onOpen: openGeoObjectModalOpen,
@@ -79,8 +85,6 @@ export function MapGl() {
         updatedAt: item.updatedAt,
       },
     }));
-
-    console.log(features);
 
     return (
       <Source
@@ -125,7 +129,7 @@ export function MapGl() {
     );
   }, [data]);
 
-  const mapRef = useRef<MapRef>(null);
+  // MAP HANDLERS
 
   const onSelectCity = useCallback(
     ({ longitude, latitude }: { longitude: number; latitude: number }) => {
@@ -149,12 +153,6 @@ export function MapGl() {
     },
     [data],
   );
-
-  const {
-    data: robotLocalization,
-    isConnected: robotIsConnected,
-    error: robotError,
-  } = useRobotLocalization();
 
   return (
     <Flex direction="row" className="w-full h-full p-3">
@@ -195,29 +193,22 @@ export function MapGl() {
       </Box>
       <Box className="relative w-full h-full rounded-lg">
         <Box className="absolute top-0 left-0 p-2" zIndex={200}>
-          <Card
-            padding={3}
-            display={'flex'}
-            direction={'row'}
-            gap={2}
-            alignItems={'center'}
-            justifyContent={'center'}
-          >
-            {robotIsConnected ? (
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-            ) : (
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-              </span>
-            )}
-            <Text fontWeight={'bold'} lineHeight={'10px'}>
-              {robotIsConnected ? 'Connected' : 'Disconnected'}
-            </Text>
-          </Card>
+          <ConnectionCard
+            items={[
+              {
+                name: 'Robot',
+                value: serverSocketConnexion || false,
+                labelConnected: 'Robot',
+                labelDisconnected: 'Robot',
+              },
+              {
+                name: 'GPS',
+                value: robotLocalization !== null,
+                labelConnected: 'GPS',
+                labelDisconnected: 'GPS',
+              },
+            ]}
+          />
         </Box>
         <Box className="absolute inset-0 rounded-lg">
           <Map

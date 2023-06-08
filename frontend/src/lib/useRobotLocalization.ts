@@ -19,10 +19,12 @@ const useRobotLocalization = (): {
     const socket = io('http://localhost:8000/geo');
 
     socket.on('connect', () => {
+      console.log('Connected to the gps module');
       setIsConnected(true);
     });
 
     socket.on('disconnect', () => {
+      console.log('Disconnected from the gps module');
       setIsConnected(false);
       setData(null);
     });
@@ -33,6 +35,7 @@ const useRobotLocalization = (): {
     });
 
     socket.on('error', (error: string) => {
+      console.log('Error from the gps module');
       setIsConnected(false);
       setData(null);
       setError(error);

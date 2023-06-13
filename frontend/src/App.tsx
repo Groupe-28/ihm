@@ -14,6 +14,7 @@ import '@fontsource/uncut-sans/600.css';
 import '@fontsource/uncut-sans/700.css';
 import { Logs } from './routes/Logs';
 import { MapPage } from './routes/Map';
+import { Workers } from './routes/Workers';
 
 const queryClient = new QueryClient();
 
@@ -52,10 +53,6 @@ function Home() {
 
 function About() {
   return <h2>About</h2>;
-}
-
-function Workers() {
-  return <h2>Workers</h2>;
 }
 
 function Users() {

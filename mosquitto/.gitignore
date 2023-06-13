@@ -1,2 +1,3 @@
-log
-data
+# ignore all log files
+*.log
+*.db
